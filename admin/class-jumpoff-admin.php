@@ -1,0 +1,328 @@
+<?php
+
+/**
+ * The admin-specific functionality of the plugin.
+ *
+ * @link       http://jessequinnlee.com
+ * @since      1.0.0
+ *
+ * @package    Jumpoff
+ * @subpackage Jumpoff/admin
+ */
+
+/**
+ * The admin-specific functionality of the plugin.
+ *
+ * Defines the plugin name, version, and two examples hooks for how to
+ * enqueue the admin-specific stylesheet and JavaScript.
+ *
+ * @package    Jumpoff
+ * @subpackage Jumpoff/admin
+ * @author     Jesse Lee <jesse@jessequinnlee.com>
+ */
+class Jumpoff_Admin {
+
+	/**
+	 * The ID of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $plugin_name    The ID of this plugin.
+	 */
+	private $plugin_name;
+
+	/**
+	 * The version of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $version    The current version of this plugin.
+	 */
+	private $version;
+
+	/**
+	 * Initialize the class and set its properties.
+	 *
+	 * @since    1.0.0
+	 * @param      string    $plugin_name       The name of this plugin.
+	 * @param      string    $version    The version of this plugin.
+	 */
+	public function __construct( $plugin_name, $version ) {
+
+		$this->plugin_name = $plugin_name;
+		$this->version = $version;
+
+	}
+
+	/**
+	 * Register the stylesheets for the admin area.
+	 *
+	 * @since    1.0.0
+	 */
+	public function enqueue_styles() {
+
+		/**
+		 * This function is provided for demonstration purposes only.
+		 *
+		 * An instance of this class should be passed to the run() function
+		 * defined in Jumpoff_Loader as all of the hooks are defined
+		 * in that particular class.
+		 *
+		 * The Jumpoff_Loader will then create the relationship
+		 * between the defined hooks and the functions defined in this
+		 * class.
+		 */
+
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/jumpoff-admin.css', array(), $this->version, 'all' );
+
+	}
+
+	/**
+	 * Register the JavaScript for the admin area.
+	 *
+	 * @since    1.0.0
+	 */
+	public function enqueue_scripts() {
+
+		/**
+		 * This function is provided for demonstration purposes only.
+		 *
+		 * An instance of this class should be passed to the run() function
+		 * defined in Jumpoff_Loader as all of the hooks are defined
+		 * in that particular class.
+		 *
+		 * The Jumpoff_Loader will then create the relationship
+		 * between the defined hooks and the functions defined in this
+		 * class.
+		 */
+
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/jumpoff-admin.js', array( 'jquery' ), $this->version, false );
+
+	}
+
+	/**
+	 * Add admin menu item for JumpOff
+	 *
+	 * @since    1.0.0
+	 */
+	public function jumpoff_menu() {
+		
+		$menu = add_menu_page( 'JumpOff Options', 
+			'JumpOff',
+			'manage_options',
+			'jumpoff',
+			array($this, 'jumpoff_show_page'),
+			'dashicons-edit',
+			'6'
+		);
+		//submenu page
+		add_submenu_page( 'jumpoff', 'My Flows', 'My Flows', 'manage_options', 'edit.php?post_type=flow');
+	
+	}
+
+	/**
+	 * Register Custom Post Type
+	 *
+	 * @since    1.0.0
+	 */
+	public function jo_flow_cpt() {
+		
+		$labels = array(
+			'name'               => _x( 'Flows', 'post type general name', 'jumpoff' ),
+			'singular_name'      => _x( 'Flow', 'post type singular name', 'jumpoff' ),
+			'menu_name'          => _x( 'Flows', 'admin menu', 'jumpoff' ),
+			'name_admin_bar'     => _x( 'Flow', 'add new on admin bar', 'jumpoff' ),
+			'add_new'            => _x( 'Add New', 'flow', 'jumpoff' ),
+			'add_new_item'       => __( 'Add New Flow', 'jumpoff' ),
+			'new_item'           => __( 'New Flow', 'jumpoff' ),
+			'edit_item'          => __( 'Edit Flow', 'jumpoff' ),
+			'view_item'          => __( 'View Flow', 'jumpoff' ),
+			'all_items'          => __( 'My Flows', 'jumpoff' ),
+			'search_items'       => __( 'Search Flows', 'jumpoff' ),
+			'parent_item_colon'  => __( 'Parent Flow:', 'jumpoff' ),
+			'not_found'          => __( 'No flows found.', 'jumpoff' ),
+			'not_found_in_trash' => __( 'No flows found in Trash.', 'jumpoff' )
+		);
+
+		$args = array(
+			'labels'             => $labels,
+	        'description'        => __( 'Description.', 'jumpoff' ),
+			'public'             => true,
+			'publicly_queryable' => false,
+			'show_ui'            => true,
+			'show_in_menu'       => false,
+			'query_var'          => true,
+			'rewrite'            => array( 'slug' => 'flow' ),
+			'capability_type'    => 'post',
+			// 'capabilities'		 => array('create_posts' => false),
+			'has_archive'        => true,
+			'hierarchical'       => false,
+			'menu_position'      => 7,
+			'supports'           => array( 'title', 'editor', 'author', 'excerpt', )
+		);
+
+		register_post_type( 'flow', $args );
+		
+		/*------- /Register Custom Post Type ---------*/
+		
+
+		/*------- Add draft status to flows ---------*/
+		
+		register_post_status( 'draft', array(
+			'label'                     => _x( 'Draft', 'flow' ),
+			'public'                    => true,
+			'exclude_from_search'       => true,
+			'show_in_admin_all_list'    => true,
+			'show_in_admin_status_list' => true,
+			'label_count'               => _n_noop( 'Draft <span class="count">(%s)</span>', 'Draft <span class="count">(%s)</span>' )
+		) );
+		
+		/*------- /Add draft status to flows ---------*/
+	}
+
+	/**
+	 * Disable creating new posts through default interface
+	 *
+	 * @since    1.0.0
+	 */	
+	public function jo_disable_new_posts() {
+
+	  global $pagenow;
+	  
+	  //get post type
+	  if ( isset($_GET['post']) ) { $post_type = get_post_type( $_GET['post'] ); }
+	  if ( isset($_GET['post_type']) ) { $post_type = $_GET['post_type']; }
+
+	  if( is_admin() && isset($post_type) ){
+			if( ($pagenow == 'edit.php' || $pagenow == 'post.php' ) && $post_type == 'flow' )  {
+				wp_enqueue_style( 'jumpoff_hide_add_new_css', '/wp-content/plugins/jumpoff/css/hide-add-new.css');
+			}  
+		}
+
+	}	
+
+	/**
+	 * Display JumpOff Page
+	 *
+	 * @since    1.0.0
+	 */
+	public function jumpoff_show_page() {
+
+		include_once plugin_dir_path( __FILE__ ) . 'partials/jumpoff-admin-display.php';
+
+	}
+
+	/*----------------------------------------- Back End AJAX Handlers  -------------------------------------*/
+
+	//a or an
+	public function jo_a_or_an($word) {
+
+		$vowels = array('a','e','i','o','u');
+		$exceptions = array('hour','unique','universal','honor','honorable','honest','honesty','one','unicorn');
+
+		$an = false;
+		if ( in_array( substr($word,0,1), $vowels ) ) {
+			$an = true;
+		}
+		if ( in_array( $word, $exceptions ) ){
+			$an = !$an;
+		}
+
+		if ($an) { return 'an'; }
+		else { return 'a'; }
+
+	}
+
+	/*-------- Get Random Prompt ------------*/
+
+	//returns a randomized prompt consisting of a verb, article and noun
+	public function jo_get_random_prompt() {
+		
+		global $wpdb;
+		$verb = $wpdb->get_results( "SELECT word FROM wp_jo_prompts WHERE word_class = 'verb' ORDER BY RAND() LIMIT 1", OBJECT );
+		$noun = $wpdb->get_results( "SELECT word FROM wp_jo_prompts WHERE word_class = 'noun' ORDER BY RAND() LIMIT 1", OBJECT );
+
+		$prompt = $verb[0]->word . ' ' . $this->jo_a_or_an($noun[0]->word) . ' ' . $noun[0]->word;
+		
+		return $prompt;
+
+	}
+
+	/*-------- /Get Random Prompt ------------*/
+
+	/*------------ Return Random Prompt to Front End Handlers ------------*/
+
+	public function jo_get_new_prompt_callback() {
+		global $wpdb; 
+		echo $this->jo_get_random_prompt();
+		wp_die(); 
+	}
+
+	/*------------ /Return Random Prompt to Front End Handlers ------------*/
+
+	/*------------------ Save flow as draft -------------------*/
+
+	//Saves flow as post draft
+	//Returns post's ID and edit link
+	public function jo_save_flow_as_draft() {
+		global $wpdb; // this is how you get access to the database
+
+	 		//get current timestamp
+	 	$timestamp = time();
+
+	 	// Create post object
+		$my_post = array(
+		  'post_type'	  => 'post',
+		  'post_title'    => $_POST['flow_title'],
+		  'post_content'  => $_POST['flow_content'],
+		  'post_status'   => 'draft'
+		  //'post_author'   => $_POST['flow_author']
+		);
+
+		error_log($_POST['flow_title'] . ' and ' . $_POST['flow_content']);
+
+		// Insert the post into the database
+		$flow_id = wp_insert_post( $my_post, true );
+		$flow_data = array('flow_id' => $flow_id, 'edit_draft_link' => get_edit_post_link($flow_id, '') );
+		echo json_encode( $flow_data );
+		wp_die(); // this is required to terminate immediately and return a proper response
+
+	}
+
+	/*------------------ /Save flow as draft -------------------*/
+
+	/*------------------ Archive Flow -------------------*/
+
+	//Archives flow as draft of 'flow' CPT
+	//returns flow's id, and edit link to frontend handlers
+	public function jo_archive_flow() {
+		global $wpdb; // this is how you get access to the database
+
+	 	//get current timestamp
+	 	$timestamp = time();
+
+	 	// Create post object
+		$my_post = array(
+		  'post_type'	  => 'flow',
+		  'post_title'    => $_POST['flow_title'],
+		  'post_content'  => $_POST['flow_content'],
+		  'post_status'   => 'draft'
+		  //'post_author'   => $_POST['flow_author']
+		);
+
+		error_log($_POST['flow_title'] . ' and ' . $_POST['flow_content']);
+
+		// Insert the post into the database
+		$flow_id = wp_insert_post( $my_post, true );
+		$flow_data = array('flow_id' => $flow_id, 'edit_draft_link' => get_edit_post_link($flow_id, '') );
+		echo json_encode( $flow_data );
+		wp_die(); 
+
+	}
+
+	/*------------------ /Archive Flow -------------------*/
+
+
+	/*----------------------------------------- /Back End AJAX Handlers  -------------------------------------*/
+
+}
