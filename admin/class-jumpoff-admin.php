@@ -40,6 +40,16 @@ class Jumpoff_Admin {
 	 */
 	private $version;
 
+	
+	/**
+	 * Public variable for admin page hook suffix
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $version    The current version of this plugin.
+	 */
+	private $hook_suffix = 'original suffix';
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -55,7 +65,7 @@ class Jumpoff_Admin {
 	}
 
 	/**
-	 * Register the stylesheets for the admin area.
+	 * Register the stylesheets for the WordPress admin area.
 	 *
 	 * @since    1.0.0
 	 */
@@ -74,6 +84,17 @@ class Jumpoff_Admin {
 		 */
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/jumpoff-admin.css', array(), $this->version, 'all' );
+
+	}
+
+	/**
+	 * Register the stylesheets for just the JumpOff admin page.
+	 *
+	 * @since    1.0.0
+	 */
+	public function jo_page_enqueue_styles() {
+
+		wp_enqueue_style( $this->plugin_name . '_page' , plugin_dir_url( __FILE__ ) . 'css/jumpoff-admin-page.css', array(), $this->version, 'all' );
 
 	}
 
@@ -107,7 +128,7 @@ class Jumpoff_Admin {
 	 */
 	public function jumpoff_menu() {
 		
-		$menu = add_menu_page( 'JumpOff Options', 
+		$this->hook_suffix = add_menu_page( 'JumpOff Options', 
 			'JumpOff',
 			'manage_options',
 			'jumpoff',
@@ -115,10 +136,22 @@ class Jumpoff_Admin {
 			'dashicons-edit',
 			'6'
 		);
+		
 		//submenu page
 		add_submenu_page( 'jumpoff', 'My Flows', 'My Flows', 'manage_options', 'edit.php?post_type=flow');
-	
+
 	}
+
+	/**
+	 * Get hook suffix for JumpOff main page
+	 *
+	 * @since    1.0.0
+	 */
+	public function jo_get_admin_page_hook_suffix() {
+		error_log($this->hook_suffix);
+		return $this->hook_suffix;
+	}
+
 
 	/**
 	 * Register Custom Post Type
@@ -279,8 +312,6 @@ class Jumpoff_Admin {
 		  //'post_author'   => $_POST['flow_author']
 		);
 
-		error_log($_POST['flow_title'] . ' and ' . $_POST['flow_content']);
-
 		// Insert the post into the database
 		$flow_id = wp_insert_post( $my_post, true );
 		$flow_data = array('flow_id' => $flow_id, 'edit_draft_link' => get_edit_post_link($flow_id, '') );
@@ -309,8 +340,6 @@ class Jumpoff_Admin {
 		  'post_status'   => 'draft'
 		  //'post_author'   => $_POST['flow_author']
 		);
-
-		error_log($_POST['flow_title'] . ' and ' . $_POST['flow_content']);
 
 		// Insert the post into the database
 		$flow_id = wp_insert_post( $my_post, true );

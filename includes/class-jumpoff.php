@@ -151,18 +151,33 @@ class Jumpoff {
 	private function define_admin_hooks() {
 
 		$plugin_admin = new Jumpoff_Admin( $this->get_plugin_name(), $this->get_version() );
+		
 		//Register Flow CPT
 		$this->loader->add_action('init', $plugin_admin, 'jo_flow_cpt');
+		
 		//JumpOff Admin Menu
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'jumpoff_menu' );
+		
 		//Disable new posts through default editor
 		$this->loader->add_action('admin_menu', $plugin_admin, 'jo_disable_new_posts');
+		
+		//Load CSS
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
+		
+		//Load conditional CSS just on JumpOff page
+		$hook_suffix = 'toplevel_page_jumpoff';
+		$hook_suffix = $plugin_admin->jo_get_admin_page_hook_suffix();
+		$this->loader->add_action( 'admin_print_styles-' . $hook_suffix , $plugin_admin, 'jo_page_enqueue_styles' );
+		
+		//Load JS
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		
 		//JumpOff AJAX Handling
 		$this->loader->add_action( 'wp_ajax_jo_get_new_prompt', $plugin_admin, 'jo_get_new_prompt_callback' );
 		$this->loader->add_action( 'wp_ajax_jo_save_flow_as_draft', $plugin_admin, 'jo_save_flow_as_draft');
 		$this->loader->add_action( 'wp_ajax_jo_archive_flow', $plugin_admin, 'jo_archive_flow');
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+
+
 
 	}
 
