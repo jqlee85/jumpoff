@@ -40,16 +40,6 @@ class Jumpoff_Admin {
 	 */
 	private $version;
 
-	
-	/**
-	 * Public variable for admin page hook suffix
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
-	 */
-	private $hook_suffix = 'original suffix';
-
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -129,17 +119,19 @@ class Jumpoff_Admin {
 	public function jumpoff_menu() {
 		
 		//Main Menu Item
-		$this->hook_suffix = add_menu_page( 'JumpOff Options', 
+		add_menu_page( 
+			'JumpOff Options', 
 			'JumpOff',
 			'manage_options',
-			'jumpoff',
+			$this->plugin_name,
 			array($this, 'jumpoff_show_page'),
 			'dashicons-edit',
 			'6'
 		);
 		
 		//Submenu Item
-		add_submenu_page( 'jumpoff', 
+		add_submenu_page( 
+			$this->plugin_name, 
 			'My Flows', 
 			'My Flows', 
 			'manage_options', 
@@ -147,18 +139,6 @@ class Jumpoff_Admin {
 		);
 
 	}
-
-	/**
-	 * Get hook suffix for JumpOff plugin page and enqueue styles
-	 *
-	 * @since    1.0.0
-	 */
-	public function jo_get_admin_page_hook_suffix() {
-		
-		return $this->hook_suffix;
-	
-	}
-
 
 	/**
 	 * Register Custom Post Type
@@ -252,17 +232,7 @@ class Jumpoff_Admin {
 
 	}
 
-	/**
-	 * Display JumpOff Dashboard Widget
-	 *
-	 * @since    1.0.0
-	 */
-	public function jo_dash_widget_display() {
-
-		echo "<h1>asdfdf</h1>";
-		// include_once plugin_dir_path( __FILE__ ) . 'partials/jumpoff-admin-dashboard-widget-display.php';
-
-	}
+	
 
 	/**
 	 * Register Dashboard Widget
@@ -276,7 +246,7 @@ class Jumpoff_Admin {
 		wp_add_dashboard_widget( 
 			'jo_dash_widget', 
 			'JumpOff', 
-			'jo_dash_widget_display' 
+			array( &$this, 'jo_dash_widget_display' )
 		);
 
 		$dashboard = $wp_meta_boxes['dashboard']['normal']['core'];
@@ -289,6 +259,16 @@ class Jumpoff_Admin {
 
 	}
 
+	/**
+	 * Display JumpOff Page
+	 *
+	 * @since    1.0.0
+	 */
+	public function jo_dash_widget_display() {
+
+		include_once plugin_dir_path( __FILE__ ) . 'partials/jumpoff-admin-dashboard-widget-display.php';
+
+	}
 
 
 	/*----------------------------------------- Back End AJAX Handlers  -------------------------------------*/

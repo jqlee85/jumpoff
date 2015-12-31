@@ -157,8 +157,7 @@ class Jumpoff {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		
 		//Load conditional CSS just on JumpOff page
-		$hook_suffix = 'toplevel_page_jumpoff';
-		$this->loader->add_action( 'admin_print_scripts-' . $hook_suffix, $plugin_admin, 'jo_page_enqueue_styles');
+		$this->loader->add_action( 'admin_print_scripts-toplevel_page_' . $this->get_plugin_name(), $plugin_admin, 'jo_page_enqueue_styles');
 
 		//Load JS
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
@@ -173,6 +172,10 @@ class Jumpoff {
 
 
 	}
+
+	
+
+
 
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.

@@ -21,7 +21,7 @@ function jumpoff_dashboard_widget() {
 	if ( !current_user_can( 'manage_options' ) )  {
 		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 	}
-	echo '<div id="jo_wrapper">';
+	echo '<div id="jo_dash_widget_wrapper">';
 		
 		echo '<h1>widget content here</h1>';
 

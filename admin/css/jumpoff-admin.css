@@ -1,0 +1,14 @@
+#jo_dash_widget .inside {
+	background-color: #555;
+	margin: 0;
+	padding-top:11px;
+}
+
+#jo_dash_widget_wrapper {
+	width:100%;
+	height:auto;
+}
+
+#jo_dash_widget_wrapper h1 {
+	color: #fff;
+}
