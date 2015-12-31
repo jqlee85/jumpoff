@@ -93,7 +93,7 @@ class Jumpoff_Admin {
 	 * @since    1.0.0
 	 */
 	public function jo_page_enqueue_styles() {
-
+		
 		wp_enqueue_style( $this->plugin_name . '_page' , plugin_dir_url( __FILE__ ) . 'css/jumpoff-admin-page.css', array(), $this->version, 'all' );
 
 	}
@@ -128,6 +128,7 @@ class Jumpoff_Admin {
 	 */
 	public function jumpoff_menu() {
 		
+		//Main Menu Item
 		$this->hook_suffix = add_menu_page( 'JumpOff Options', 
 			'JumpOff',
 			'manage_options',
@@ -137,19 +138,25 @@ class Jumpoff_Admin {
 			'6'
 		);
 		
-		//submenu page
-		add_submenu_page( 'jumpoff', 'My Flows', 'My Flows', 'manage_options', 'edit.php?post_type=flow');
+		//Submenu Item
+		add_submenu_page( 'jumpoff', 
+			'My Flows', 
+			'My Flows', 
+			'manage_options', 
+			'edit.php?post_type=flow'
+		);
 
 	}
 
 	/**
-	 * Get hook suffix for JumpOff main page
+	 * Get hook suffix for JumpOff plugin page and enqueue styles
 	 *
 	 * @since    1.0.0
 	 */
 	public function jo_get_admin_page_hook_suffix() {
-		error_log($this->hook_suffix);
+		
 		return $this->hook_suffix;
+	
 	}
 
 
@@ -244,6 +251,45 @@ class Jumpoff_Admin {
 		include_once plugin_dir_path( __FILE__ ) . 'partials/jumpoff-admin-display.php';
 
 	}
+
+	/**
+	 * Display JumpOff Dashboard Widget
+	 *
+	 * @since    1.0.0
+	 */
+	public function jo_dash_widget_display() {
+
+		echo "<h1>asdfdf</h1>";
+		// include_once plugin_dir_path( __FILE__ ) . 'partials/jumpoff-admin-dashboard-widget-display.php';
+
+	}
+
+	/**
+	 * Register Dashboard Widget
+	 *
+	 * @since    1.0.0
+	 */
+	public function jo_dashboard_widget() {
+
+		global $wp_meta_boxes;
+
+		wp_add_dashboard_widget( 
+			'jo_dash_widget', 
+			'JumpOff', 
+			'jo_dash_widget_display' 
+		);
+
+		$dashboard = $wp_meta_boxes['dashboard']['normal']['core'];
+
+		$jo_widget = array( 'jo_dash_widget' => $dashboard['jo_dash_widget'] );
+ 		unset( $dashboard['jo_dash_widget'] );
+
+ 		$sorted_dashboard = array_merge( $jo_widget, $dashboard );
+ 		$wp_meta_boxes['dashboard']['normal']['core'] = $sorted_dashboard;
+
+	}
+
+
 
 	/*----------------------------------------- Back End AJAX Handlers  -------------------------------------*/
 
