@@ -115,7 +115,7 @@ function jo_recent_flows( $flows = false ) {
 		$query_args = array(
 			'post_type'      => 'flow',
 			'post_status'	 => 'draft, publish, pending',
-			'posts_per_page' => 4,
+			'posts_per_page' => 10,
 			'orderby'        => 'modified',
 			'order'          => 'DESC'
 		);
@@ -126,12 +126,12 @@ function jo_recent_flows( $flows = false ) {
  	}
 
 	
-	if ( count( $flows ) > 3 ) {
+	if ( count( $flows ) > 10 ) {
 		echo '<p class="view-all"><a href="' . esc_url( admin_url( 'edit.php?post_status=draft' ) ) . '">' . _x( 'View all', 'drafts' ) . "</a></p>\n";
  	}
 	echo '<h4 class="hide-if-no-js jo_recent_flows_title">' . __( 'Recent Flows' ) . "</h4>";
 
-	$flows = array_slice( $flows, 0, 3 );
+	$flows = array_slice( $flows, 0, 10 );
 	foreach ( $flows as $flow ) {
 		$url = get_edit_post_link( $flow->ID );
 		$title = _draft_or_post_title( $flow->ID );

@@ -74,7 +74,6 @@ class Jumpoff {
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
-		$this->define_public_hooks();
 
 	}
 
@@ -86,7 +85,6 @@ class Jumpoff {
 	 * - Jumpoff_Loader. Orchestrates the hooks of the plugin.
 	 * - Jumpoff_i18n. Defines internationalization functionality.
 	 * - Jumpoff_Admin. Defines all hooks for the admin area.
-	 * - Jumpoff_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -112,12 +110,6 @@ class Jumpoff {
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-jumpoff-admin.php';
-
-		/**
-		 * The class responsible for defining all actions that occur in the public-facing
-		 * side of the site.
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-jumpoff-public.php';
 
 		$this->loader = new Jumpoff_Loader();
 
@@ -179,22 +171,6 @@ class Jumpoff {
 		$this->loader->add_action( 'wp_ajax_jo_save_flow_as_draft', $plugin_admin, 'jo_save_flow_as_draft');
 		$this->loader->add_action( 'wp_ajax_jo_archive_flow', $plugin_admin, 'jo_archive_flow');
 
-
-	}
-
-	/**
-	 * Register all of the hooks related to the public-facing functionality
-	 * of the plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 */
-	private function define_public_hooks() {
-
-		$plugin_public = new Jumpoff_Public( $this->get_plugin_name(), $this->get_version() );
-
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
 	}
 
