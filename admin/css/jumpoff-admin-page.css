@@ -3,6 +3,8 @@
  * included in this file.
  */
 
+/* Default WP Admin Styles */
+
 #wpwrap {
 	background-color: #222;
 }
@@ -10,6 +12,16 @@
 ul#adminmenu a.wp-has-current-submenu:after, ul#adminmenu>li.current>a.current:after {
 	border-right-color: #222;
 }
+
+#wpfooter {
+	display: none !important;
+}
+
+#wpwrap {
+	height:auto !important;
+}
+
+/* JumpOff Styles */
 
 .jo_hide {
 	display:none !important;
@@ -145,10 +157,6 @@ ul#adminmenu a.wp-has-current-submenu:after, ul#adminmenu>li.current>a.current:a
 }
 
 
-#jo_flow_counter:hover {
-	/*opacity:1 !important;*/
-}
-
 /* Flow Archive */
 
 .jo_recent_flows_title {
@@ -175,3 +183,34 @@ ul#adminmenu a.wp-has-current-submenu:after, ul#adminmenu>li.current>a.current:a
 .jo_table_header {
 	background-color:#333;
 }
+
+/* Prompt Time Selector */
+
+#jo_prompt_times {
+	padding-top:40px;
+	width:auto;
+	height:auto;
+	margin:auto;
+	text-align:center;
+}
+
+.jo_prompt_time {
+	color: #aaa;
+	border: 3px solid #aaa;
+	padding: 10px;
+	width:auto;
+	display: inline;
+	margin: 10px;
+	cursor: pointer;
+}
+
+.jo_prompt_time.jo_checked {
+	color:#fefefe;
+	border: 3px solid #fefefe;
+}
+
+.jo_prompt_time:hover {
+	color: #7cffa4;
+	border: 3px solid #7cffa4;
+}
+

@@ -40,12 +40,12 @@ function jumpoff_page() {
 //display prompt box
 function jo_display_prompt_box() {
 	?>
-	<div id="jo_flow_times">
+	<div id="jo_prompt_times">
 		<?php // CHANGE to customized elements with data attributes instead of radio buttons, make the length is the button, with a border or color change to indicate selected value ?>
-		<input type="radio" name="jo_flow_time" value="20" checked>20sec
-		<input type="radio" name="jo_flow_time" value="60">1min
-		<input type="radio" name="jo_flow_time" value="300">5min	
-		<input type="radio" name="jo_flow_time" value="600">10min
+		<div class="jo_prompt_time jo_checked" id="jo_prompt_time_20" data-value="20">20sec</div>
+		<div class="jo_prompt_time" id="jo_prompt_time_60" data-value="60">1min</div>
+		<div class="jo_prompt_time" id="jo_prompt_time_300" data-value="300">5min</div>	
+		<div class="jo_prompt_time" id="jo_prompt_time_600" data-value="600">10min</div>
 	</div>
 	<div id="jo_prompt" class="jo_hide"></div>
 	<input id="jo_prompt_me" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit" value="Prompt Me"/>
