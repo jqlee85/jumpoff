@@ -157,33 +157,6 @@ ul#adminmenu a.wp-has-current-submenu:after, ul#adminmenu>li.current>a.current:a
 }
 
 
-/* Flow Archive */
-
-.jo_recent_flows_title {
-	text-align:center;
-	margin:auto;
-}
-
-#jo_recent_flows_table table {
-	margin:auto;
-	color: #fff;
-}
-
-#jo_recent_flows_table table td p{
-	margin: 0 5px;
-	color:#aaa;
-}
-
-#jo_recent_flows_table table td input {
-	display:inline-block;
-	text-align:center;
-	margin:auto;
-}
-
-.jo_table_header {
-	background-color:#333;
-}
-
 /* Prompt Time Selector */
 
 #jo_prompt_times {

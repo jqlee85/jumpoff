@@ -18,7 +18,7 @@
  * @since      1.0.0
  * @package    Jumpoff
  * @subpackage Jumpoff/includes
- * @author     Jesse Lee <jesse@jessequinnlee.com>
+ * @author     Jesse Lee <jesse@jumpoff.io>
  */
 class Jumpoff_Activator {
 
@@ -32,7 +32,7 @@ class Jumpoff_Activator {
 	public static function activate() {
 
 		/*---------- create database table for prompt words ---------------*/
-		//accepts id, word, and class as arguments, inserts to db
+		//accepts id, word, and word class as arguments, inserts to db table
 		function jo_insert_word_to_db($word_id, $word_word, $word_class, $table_name) {
 			global $wpdb;
 			$wpdb->insert( 
@@ -77,12 +77,12 @@ class Jumpoff_Activator {
 
 			//create verb array
 			$verb_list = array(
-				'surf','turn','kiss','brace','run','embellish','transfer','push','think','love','jump','type','play','sue','cut','expand','dress up','win','lose','pull','redirect','sail','rake','yell','whisper','shade','draw','bathe','clean','estimate','improvise','listen','speak','translate','empathize','free','defend','attack','float','swim','sink','dive','paint','stretch','blow','weigh','pack','wrap','stack','sprint','cruise','extend','grow','plunge','glow','purchase','disappear','hug','invite','employ','quit','shake','inspect','cook','prepare','bake','thaw','boil','store','rate','describe','deconstruct','consider','reverse','revert','score','build','assemble','cover','stain','fry','forage','gather','rest','assault','agree','rekindle','taste','smell','sniff','inhale','hear','careen','blast','charge','scoot','soar','amble','ski','skate','sink','berate','insult','compliment','convince','deceive','inform','comfort','collapse'
+				'surf','turn','kiss','brace','run','embellish','transfer','push','think','love','jump','type','play','sue','cut','expand','dress up','win','lose','pull','redirect','sail','rake','yell','whisper','shade','draw','bathe','clean','estimate','improvise','listen','speak','translate','empathize','free','defend','attack','float','swim','sink','dive','paint','stretch','blow','underestimate','praise','weigh','pack','wrap','stack','sprint','cruise','extend','grow','plunge','glow','purchase','disappear','hug','invite','employ','quit','shake','inspect','cook','prepare','bake','thaw','boil','store','rate','describe','deconstruct','consider','reverse','revert','score','build','assemble','cover','stain','fry','forage','gather','rest','assault','agree','rekindle','taste','smell','sniff','inhale','hear','careen','blast','charge','scoot','soar','amble','ski','skate','sink','berate','insult','compliment','convince','deceive','inform','comfort','collapse'
 			);
 
 			//create noun array
 			$noun_list = array(
-				'board','plank','workout','tennis racquet','beer','window','door','face','body','foot','hand','envelope','pencil','pen','hair','session','lips','shin','home','department','apartment','house','brink','brick','stairway','skeleton','lawsuit','relationship','core','fruit','spaghetti','sandwich','turkey','basketball','surfboard','wave','conversation','experience','telephone','computer','tablet','pill','medication','prescription','examination','homework','novel','manuscript','banana','papaya','porch','boat','car','cabin','basement','heater','room','block','town','city','state','country','nation','fish','shark','dolphin','coral','bear','code','cord','pipe','scripture','sermon','savior','religion','belief','atheist','skeptic','interest','elbow','elephant','position','court','field','lawn','teacher','principal','judge','lawyer','doctor','president','senator','liar','politician','celebrity','stud','beauty','painting','sculpture'
+				'board','plank','workout','tennis racquet','tooth','olive','beer','window','door','face','body','foot','hand','envelope','pencil','pen','hair','session','lips','shin','home','department','apartment','house','brink','brick','stairway','skeleton','lawsuit','relationship','core','fruit','spaghetti','sandwich','turkey','basketball','surfboard','wave','conversation','experience','telephone','computer','tablet','pill','medication','prescription','examination','homework','novel','manuscript','banana','papaya','porch','boat','car','cabin','basement','heater','room','block','town','city','state','country','nation','fish','shark','dolphin','coral','bear','code','cord','pipe','scripture','sermon','savior','religion','belief','atheist','skeptic','interest','elbow','elephant','position','court','field','lawn','teacher','principal','judge','lawyer','doctor','president','senator','liar','politician','celebrity','stud','beauty','painting','sculpture'
 			);
 			
 			$counter = 1;

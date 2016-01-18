@@ -165,11 +165,6 @@
 				jQuery('#jo_prompt').append(response);
 			});
 		});
-
-		//discard flow
-		jQuery('#jo_flow_trash').click(function(){
-			location.reload();
-		});
 		
 		//archive flow
 		jQuery('#jo_flow_archive').click(function(){

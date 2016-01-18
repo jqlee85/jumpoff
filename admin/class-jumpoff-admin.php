@@ -82,9 +82,29 @@ class Jumpoff_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function jo_page_enqueue_styles() {
+	public function jo_page_enqueue_styles($hook) {
+		
+		if ('toplevel_page_'.$this->plugin_name != $hook) {
+			return;
+		}
 		
 		wp_enqueue_style( $this->plugin_name . '_page' , plugin_dir_url( __FILE__ ) . 'css/jumpoff-admin-page.css', array(), $this->version, 'all' );
+
+	}
+
+	/**
+	 * Register the stylesheets for just the My Flows admin page.
+	 *
+	 * @since    1.0.0
+	 */
+	public function jo_my_flows_enqueue_styles($hook) {
+
+		if ($this->plugin_name.'_page_'.$this->plugin_name.'-flows' != $hook) {
+			
+			return;
+		}
+
+		wp_enqueue_style( $this->plugin_name . '_my_flows' , plugin_dir_url( __FILE__ ) . 'css/jumpoff-admin-my-flows.css', array(), $this->version, 'all' );
 
 	}
 
@@ -104,9 +124,28 @@ class Jumpoff_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function jo_page_enqueue_scripts() {
+	public function jo_page_enqueue_scripts($hook) {
+
+		if ('toplevel_page_'.$this->plugin_name != $hook) {
+			return;
+		}
 
 		wp_enqueue_script( $this->plugin_name . '_page', plugin_dir_url( __FILE__ ) . 'js/jumpoff-admin-page.js', array( 'jquery' ), $this->version, false );
+
+	}
+
+	/**
+	 * Register the JavaScript for the JumpOff Admin Page.
+	 *
+	 * @since    1.0.0
+	 */
+	public function jo_my_flows_enqueue_scripts($hook) {
+
+		if ($this->plugin_name.'_page_'.$this->plugin_name.'-flows' != $hook) {
+			return;
+		}
+
+		wp_enqueue_script( $this->plugin_name . '_my_flows', plugin_dir_url( __FILE__ ) . 'js/jumpoff-admin-my-flows.js', array( 'jquery' ), $this->version, false );
 
 	}
 
@@ -134,9 +173,10 @@ class Jumpoff_Admin {
 			'My Flows', 
 			'My Flows', 
 			'manage_options', 
-			'edit.php?post_type=flow'
+			$this->plugin_name.'-flows',
+			array($this,'jumpoff_show_my_flows_page')
 		);
-
+		
 	}
 
 	/**
@@ -228,6 +268,17 @@ class Jumpoff_Admin {
 	public function jumpoff_show_page() {
 
 		include_once plugin_dir_path( __FILE__ ) . 'partials/jumpoff-admin-display.php';
+
+	}
+
+	/**
+	 * Display JumpOff Flows Page
+	 *
+	 * @since    1.0.0
+	 */
+	public function jumpoff_show_my_flows_page() {
+
+		include_once plugin_dir_path( __FILE__ ) . 'partials/jumpoff-admin-my-flows-display.php';
 
 	}
 
