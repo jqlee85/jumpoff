@@ -236,8 +236,45 @@ class Jumpoff_Admin {
 			'label_count'               => _n_noop( 'Draft <span class="count">(%s)</span>', 'Draft <span class="count">(%s)</span>' )
 		) );
 		
-		/*------- /Add draft status to flows ---------*/
+
 	}
+
+	
+	/**
+	 * Add flow star meta box to flow posts
+	 *
+	 * @since    1.0.0
+	 */	
+	public function jo_add_flow_meta_boxes() {
+
+	  add_meta_box(
+	    'jumpoff_flow_flag',      // Unique ID
+	    esc_html__( 'Starred', 'example' ),    // Title
+	    array($this, 'jo_flow_star_meta_box'),   // Callback function
+	    'flow',         // Admin page (or post type)
+	    'side',         // Context
+	    'default'         // Priority
+	  );
+	}
+
+	/**
+	 * Display flow Star custom meta box
+	 *
+	 * @since    1.0.0
+	 */	
+	public function jo_flow_star_meta_box($object, $box) { 
+
+		  wp_nonce_field( basename( __FILE__ ), 'smashing_post_class_nonce' ); ?>
+
+		  <p>
+		    <label for="smashing-post-class"><?php _e( "Flag this flow", 'example' ); ?></label>
+		    <br />
+		    <input  type="checkbox" name="smashing-post-class" id="smashing-post-class" value="<?php echo esc_attr( get_post_meta( $object->ID, 'smashing_post_class', true ) ); ?>" />
+		  </p>
+		  <?php
+	}	
+
+
 
 	/**
 	 * Disable creating new posts through default interface

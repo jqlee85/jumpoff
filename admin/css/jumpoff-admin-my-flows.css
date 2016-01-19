@@ -6,11 +6,11 @@
 /* Default WP Admin Styles */
 
 #wpwrap {
-	background-color: #222;
+	background-color: #2b2b2b;
 }
 
 ul#adminmenu a.wp-has-current-submenu:after, ul#adminmenu>li.current>a.current:after {
-	border-right-color: #222;
+	border-right-color: #2b2b2b;
 }
 
 #wpfooter {
@@ -35,7 +35,7 @@ ul#adminmenu a.wp-has-current-submenu:after, ul#adminmenu>li.current>a.current:a
 	width:100%;
 	height:auto;
 	min-height:800px;
-	background-color: #222;
+	background-color: #2b2b2b;
 	padding:60px auto;
 	
 }
@@ -46,16 +46,34 @@ ul#adminmenu a.wp-has-current-submenu:after, ul#adminmenu>li.current>a.current:a
 	text-align:center;
 	margin: 40px auto;
 	color: #efefef;
+	font-size:20px;
 }
 
 #jo_recent_flows_table table {
 	margin:auto;
 	color: #efefef;
+	background-color:#2F3438;
+	border-radius:4px;
+	
+}
+
+#jo_recent_flows_table table tr {
+	height:30px;
+}
+
+#jo_recent_flows_table th {
+	height:60px;
+	font-size:16px;
+	padding:0 10px;
+	font-weight:normal;
+	/*color:#2B9883;*/
+
 }
 
 #jo_recent_flows_table table td p{
 	margin: 0 5px;
 	color:#aaa;
+	font-size:14px;
 }
 
 #jo_recent_flows_table table td input {
@@ -65,5 +83,10 @@ ul#adminmenu a.wp-has-current-submenu:after, ul#adminmenu>li.current>a.current:a
 }
 
 .jo_table_header {
-	background-color:#333;
+	
+	
+}
+
+#jo_recent_flows_table tr:nth-child(even) {
+    background-color: #2a2e32;
 }

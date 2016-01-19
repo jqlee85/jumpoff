@@ -38,12 +38,14 @@ function jumpoff_page() {
 //display prompt box
 function jo_display_prompt_box() {
 	?>
-	<div id="jo_prompt_times">
+	<div id="jo_prompt_times_container">
 		<?php // CHANGE to customized elements with data attributes instead of radio buttons, make the length is the button, with a border or color change to indicate selected value ?>
-		<div class="jo_prompt_time jo_checked" id="jo_prompt_time_20" data-value="20">20sec</div>
-		<div class="jo_prompt_time" id="jo_prompt_time_60" data-value="60">1min</div>
-		<div class="jo_prompt_time" id="jo_prompt_time_300" data-value="300">5min</div>	
-		<div class="jo_prompt_time" id="jo_prompt_time_600" data-value="600">10min</div>
+		<ul id="jo_prompt_times">
+			<li class="jo_prompt_time jo_checked" id="jo_prompt_time_20" data-value="20">20<br><span>sec</span></li>
+			<li class="jo_prompt_time" id="jo_prompt_time_60" data-value="60">1<br><span>min</span></li>
+			<li class="jo_prompt_time" id="jo_prompt_time_300" data-value="300">5<br><span>min</span></li>	
+			<li class="jo_prompt_time" id="jo_prompt_time_600" data-value="600">10<br><span>min</span></li>
+		</ul>
 	</div>
 	<div id="jo_prompt" class="jo_hide"></div>
 	<input id="jo_prompt_me" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit" value="Prompt Me"/>
@@ -54,8 +56,9 @@ function jo_display_prompt_box() {
 function jo_display_flow_box() {	
 	?>
 	<div class="auto_wrapper">
-		<input type="textarea" id="jo_flow_box"/>
 		
+		<input type="textarea" id="jo_flow_box"/>
+		<!-- <div id="jo_flow_box_overlay"></div> -->
 		<div id="jo_flow_fade"></div>
 	
 	</div>

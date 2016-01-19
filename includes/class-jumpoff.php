@@ -147,6 +147,9 @@ class Jumpoff {
 		//Register Flow CPT
 		$this->loader->add_action('init', $plugin_admin, 'jo_flow_cpt');
 		
+		//Add Star Metaboxes to Flow posts
+		$this->loader->add_action('add_meta_boxes', $plugin_admin, 'jo_add_flow_meta_boxes');
+
 		//JumpOff Admin Menu
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'jumpoff_menu' );
 		
@@ -181,10 +184,6 @@ class Jumpoff {
 
 
 	}
-
-	
-
-
 
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
