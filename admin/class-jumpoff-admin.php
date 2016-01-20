@@ -239,43 +239,6 @@ class Jumpoff_Admin {
 
 	}
 
-	
-	/**
-	 * Add flow star meta box to flow posts
-	 *
-	 * @since    1.0.0
-	 */	
-	public function jo_add_flow_meta_boxes() {
-
-	  add_meta_box(
-	    'jumpoff_flow_flag',      // Unique ID
-	    esc_html__( 'Starred', 'example' ),    // Title
-	    array($this, 'jo_flow_star_meta_box'),   // Callback function
-	    'flow',         // Admin page (or post type)
-	    'side',         // Context
-	    'default'         // Priority
-	  );
-	}
-
-	/**
-	 * Display flow Star custom meta box
-	 *
-	 * @since    1.0.0
-	 */	
-	public function jo_flow_star_meta_box($object, $box) { 
-
-		  wp_nonce_field( basename( __FILE__ ), 'smashing_post_class_nonce' ); ?>
-
-		  <p>
-		    <label for="smashing-post-class"><?php _e( "Flag this flow", 'example' ); ?></label>
-		    <br />
-		    <input  type="checkbox" name="smashing-post-class" id="smashing-post-class" value="<?php echo esc_attr( get_post_meta( $object->ID, 'smashing_post_class', true ) ); ?>" />
-		  </p>
-		  <?php
-	}	
-
-
-
 	/**
 	 * Disable creating new posts through default interface
 	 *
@@ -319,6 +282,16 @@ class Jumpoff_Admin {
 
 	}
 
+	/**
+	 * Display JumpOff DashBoard Widget
+	 *
+	 * @since    1.0.0
+	 */
+	public function jo_dash_widget_display() {
+
+		include_once plugin_dir_path( __FILE__ ) . 'partials/jumpoff-admin-dashboard-widget-display.php';
+
+	}
 	
 
 	/**
@@ -347,18 +320,128 @@ class Jumpoff_Admin {
 	}
 
 	/**
-	 * Display JumpOff Page
+	 * Add flow star meta box to flow posts
 	 *
 	 * @since    1.0.0
+	 */	
+	public function jo_add_flow_meta_boxes() {
+
+	  add_meta_box(
+	    'jumpoff_flow_flag',      // Unique ID
+	    esc_html__( 'Starred', 'example' ),    // Title
+	    array($this, 'jo_flow_star_meta_box'),   // Callback function
+	    'flow',         // Admin page (or post type)
+	    'side',         // Context
+	    'default'         // Priority
+	  );
+	}
+
+	/**
+	 * Display flow Star custom meta box
+	 *
+	 * @since    1.0.0
+	 */	
+	public function jo_flow_star_meta_box($post) { 
+
+		//Add nonce field so we can check for it later
+		wp_nonce_field( 'jo_save_post_flag' , 'jo_star_meta_box_nonce' );
+
+		//Get current value of flag
+		$is_starred = get_post_meta( $post->ID, 'jumpoff_flow_flag', true ); 
+		
+		?>
+
+		  <p>
+		    <label for="jo_flow_star"><?php _e( "Star this Flow", 'example' ); ?></label>
+		    <br />
+		    <input  type="checkbox" name="jo_flow_star" id="jo_flow_star" <?php if( $is_starred == true ) { ?>checked="checked"<?php } ?> />
+		  </p>
+		  <?php
+	}	
+
+	/**
+	 * When the post is saved, saves flag/no flag for Flow.
+	 *
+	 *@since 	  1.0.0
+	 *@param int $post_id The ID of the post being saved.
 	 */
-	public function jo_dash_widget_display() {
+	public function jo_save_post_flag( $post_id ) {
 
-		include_once plugin_dir_path( __FILE__ ) . 'partials/jumpoff-admin-dashboard-widget-display.php';
+		$post_id = (int) $post_id;
+		
+		/*
+		 * We need to verify this came from our screen and with proper authorization,
+		 * because the save_post action can be triggered at other times.
+		 */
 
+		// Check if our nonce is set.
+		if ( ! isset( $_POST['jo_star_meta_box_nonce'] ) ) {
+			return;
+		}
+
+		// Verify that the nonce is valid.
+		if ( ! wp_verify_nonce( $_POST['jo_star_meta_box_nonce'], 'jo_save_post_flag' ) ) {
+			return;
+		}
+
+		// If this is an autosave, our form has not been submitted, so we don't want to do anything.
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return;
+		}
+
+		// Check the user's permissions.
+		if ( isset( $_POST['post_type'] ) && 'page' == $_POST['post_type'] ) {
+
+			if ( ! current_user_can( 'edit_page', $post_id ) ) {
+				return;
+			}
+
+		} else {
+
+			if ( ! current_user_can( 'edit_post', $post_id ) ) {
+				return;
+			}
+		}
+		
+		// Make sure that it is set.
+		if ( ! isset( $_POST['jo_flow_star'] ) ) {
+			$is_starred = false;
+		}
+		else {
+			$is_starred = true;
+		}
+		
+		// Update the meta field in the database.
+		update_post_meta( $post_id, 'jumpoff_flow_flag', $is_starred );
 	}
 
 
 	/*----------------------------------------- Back End AJAX Handlers  -------------------------------------*/
+
+	/**
+	 * Saves star/unstar value for Flows on Recent Flows page
+	 *
+	 *@since 	  1.0.0
+	 *@param      Gets parameters form AJAX $_POST
+	 */
+	public function jo_save_flow_star() {
+
+		global $wpdb;
+
+		$flow_id = (int) $_POST['flow_id'];
+		if ( isset($_POST['is_starred']) ) { $is_starred = (bool) $_POST['is_starred']; }
+		else { $is_starred = false; }
+		
+
+		// Update the meta field in the database.
+		$is_success = update_post_meta( $flow_id, 'jumpoff_flow_flag', $is_starred );
+
+		echo json_encode( array( 'jo_success' => $is_success ) );
+		wp_die();
+
+	}
+
+
 
 	//a or an
 	public function jo_a_or_an($word) {

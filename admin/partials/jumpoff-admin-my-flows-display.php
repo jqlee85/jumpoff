@@ -36,8 +36,8 @@ function jo_display_flow_archive() {
 			<tr class="jo_table_header">
 				<th>Date</th>
 				<th>Prompt</th>
-				<th>Flow</th>
-				<th>Flagged?</th>
+				<th class="jo_hide_sm">Flow</th>
+				<th>Star</th>
 				<th>Edit</th>
 			</tr>
 			
@@ -75,9 +75,19 @@ function jo_recent_flows( $flows = false ) {
 
 	$flows = array_slice( $flows, 0, 10 );
 	foreach ( $flows as $flow ) {
+		
+		//get Flow edit link
 		$url = get_edit_post_link( $flow->ID );
+		
+		//get Flow title
 		$title = _draft_or_post_title( $flow->ID );
+		
+		//get formatted Date created
 		$flow_time = get_the_time( ('n/j/Y'), $flow );
+
+		//get if Flow has been starred or not
+		$is_starred = get_post_meta( $flow->ID, 'jumpoff_flow_flag', true ); 
+
 		//echo flow row
 		?>
 		<tr>
@@ -87,13 +97,13 @@ function jo_recent_flows( $flows = false ) {
 			<td>
 				<p><?php echo $title;?></p>
 			</td>
-			<td>
+			<td class="jo_hide_sm">
 				<p><?php if ( $the_content = wp_trim_words( $flow->post_content, 10 ) ) {
 				echo $the_content;
  				}?></p>
  			</td>
 			<td>
-				<input type="checkbox"></input>
+				<input type="checkbox" class="jo_flow_star" name="jo_flow_star_<?php echo $flow->ID; ?>" id="jo_flow_star_<?php echo $flow->ID; ?>" <?php if ( $is_starred ) { ?>checked="checked"<?php } ?> />
 			</td>
 			<td>
 				<?php echo '<div class="flow_title"><a href="' . esc_url( $url ) . '" title="' . esc_attr( sprintf( __( 'Edit &#8220;%s&#8221;' ), $title ) ) . '"><button>Edit</button></a>';?>

@@ -154,8 +154,7 @@
 
 		//get new prompt
 		var data = {
-			'action': 'jo_get_new_prompt',
-			'whatever': 1234
+			'action': 'jo_get_new_prompt'
 		};
 
 		jQuery('#jo_prompt_me').click(function(){

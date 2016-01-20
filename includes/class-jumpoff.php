@@ -150,6 +150,9 @@ class Jumpoff {
 		//Add Star Metaboxes to Flow posts
 		$this->loader->add_action('add_meta_boxes', $plugin_admin, 'jo_add_flow_meta_boxes');
 
+		//Save Star metabox with Flow post save
+		$this->loader->add_action('save_post', $plugin_admin, 'jo_save_post_flag' );
+
 		//JumpOff Admin Menu
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'jumpoff_menu' );
 		
@@ -181,6 +184,7 @@ class Jumpoff {
 		$this->loader->add_action( 'wp_ajax_jo_get_new_prompt', $plugin_admin, 'jo_get_new_prompt_callback' );
 		$this->loader->add_action( 'wp_ajax_jo_save_flow_as_draft', $plugin_admin, 'jo_save_flow_as_draft');
 		$this->loader->add_action( 'wp_ajax_jo_archive_flow', $plugin_admin, 'jo_archive_flow');
+		$this->loader->add_action( 'wp_ajax_jo_save_flow_star', $plugin_admin, 'jo_save_flow_star');
 
 
 	}

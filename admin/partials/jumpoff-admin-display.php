@@ -58,7 +58,7 @@ function jo_display_flow_box() {
 	<div class="auto_wrapper">
 		
 		<input type="textarea" id="jo_flow_box"/>
-		<!-- <div id="jo_flow_box_overlay"></div> -->
+		<div id="jo_flow_box_overlay"></div>
 		<div id="jo_flow_fade"></div>
 	
 	</div>
