@@ -6,11 +6,11 @@
 /* Default WP Admin Styles */
 
 #wpwrap {
-	background-color: #2b2b2b;
+	background-color: #352C3D;
 }
 
 ul#adminmenu a.wp-has-current-submenu:after, ul#adminmenu>li.current>a.current:after {
-	border-right-color: #2b2b2b;
+	border-right-color: #352C3D;
 }
 
 #wpfooter {
@@ -35,7 +35,7 @@ ul#adminmenu a.wp-has-current-submenu:after, ul#adminmenu>li.current>a.current:a
 	width:100%;
 	height:auto;
 	min-height:800px;
-	background-color: #2b2b2b;
+	background-color: #352C3D;
 	padding:60px auto;
 	
 }
@@ -209,5 +209,20 @@ ul#adminmenu a.wp-has-current-submenu:after, ul#adminmenu>li.current>a.current:a
 
 .jo_prompt_time:hover {
 	border-bottom: 4px solid #fefefe;
+}
+
+#jo_bottom_logo {
+	display:block;
+	height:auto;
+	margin:auto;
+	margin-top:40px;
+	text-align:center;
+}
+
+#jo_bottom_logo img{
+	width:100px;
+	display:inline-block;
+	height:auto;
+
 }
 

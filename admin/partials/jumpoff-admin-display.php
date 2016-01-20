@@ -31,6 +31,8 @@ function jumpoff_page() {
 
 		jo_display_flow_counter();
 
+		jo_display_jumpoff_logo();
+
 	echo '</div>';
 
 }
@@ -83,6 +85,12 @@ function jo_display_flow_end_box() {
 function jo_display_flow_counter() {
 	?>
 	<div id="jo_flow_counter"></div>
+	<?php
+}
+
+function jo_display_jumpoff_logo() {
+	?>
+	<a id="jo_bottom_logo" href="http://jumpoff.io"><img src="<?php echo(plugin_dir_url( $file ).'jumpoff/assets/jumpoff-logo-wide-400.jpg'); ?>" alt="JumpOff Creative Writing App"/></a>
 	<?php
 }
 
