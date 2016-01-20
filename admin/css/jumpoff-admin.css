@@ -1,5 +1,5 @@
 #jo_dash_widget .inside {
-	background-color: #555;
+	background-color: #2b2b2b;
 	margin: 0;
 	padding-top:11px;
 }
@@ -7,8 +7,62 @@
 #jo_dash_widget_wrapper {
 	width:100%;
 	height:auto;
+	text-align:center;
 }
 
 #jo_dash_widget_wrapper h1 {
-	color: #fff;
+	color: #efefef;
+}
+
+.jo_button {
+	border-radius: 4px;
+	height: 60px;
+	padding: 0 20px;
+	border: none;
+	cursor: pointer;
+	background: #2B9883;
+	cursor:pointer;
+	box-shadow: 1px 1px 3px #242424;
+	color:#EEEEEE;
+	width:auto;
+	text-align:center;
+	margin:auto;
+}
+
+.jo_button:hover {
+	background-color: #FBAD65;
+}
+
+#jo_start_flowing {
+	display:inline-block;
+	margin: 20px auto;
+	height:40px;
+	padding:0px;
+	box-shadow:none;
+	background-color:#4c3b5b;
+}
+
+#jo_start_flowing:hover {
+	background-color: #FBAD65;
+}
+
+
+#jo_dash_stats{
+	text-align:left;
+	font-size:16px;
+	margin:auto;
+}
+
+#jo_dash_stats tr {
+	height:30px;
+}
+
+.jo_stat_text {
+	color:#eee;
+}
+
+.jo_stat_number {
+	color: #eee;
+	font-size: 20px;
+	padding:10px 20px;
 }

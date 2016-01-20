@@ -53,33 +53,13 @@ ul#adminmenu a.wp-has-current-submenu:after, ul#adminmenu>li.current>a.current:a
 }
 
 #jo_prompt_me {
-	border-radius: 0;
-	width: 100px;
-	height: 60px;
 	display:block;
-	margin:auto;
-	text-align:center;
-	border:none;
-	border-radius:4px;
-	cursor:pointer;
 	margin:60px auto 30px;
-	background: #2B9883;
-	color:#EEEEEE;
-	cursor:pointer;
-	box-shadow: 1px 1px 3px #242424;
 }
 
-#jo_prompt_me:hover, #jo_flow_archive:hover, #jo_flow_save_as_draft:hover, #jo_flow_edit_now:hover {
-	background-color: #FBAD65;
-}
 
-.jo_button {
-	border-radius: 5px;
-	height: 60px;
-	padding: 0 20px;
-	border: none;
-	cursor: pointer;
-}
+
+
 
 .auto_wrapper {
 	width: 40%;

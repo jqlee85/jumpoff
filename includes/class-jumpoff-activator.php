@@ -31,6 +31,7 @@ class Jumpoff_Activator {
 	 */
 	public static function activate() {
 
+
 		/*---------- create database table for prompt words ---------------*/
 		//accepts id, word, and word class as arguments, inserts to db table
 		function jo_insert_word_to_db($word_id, $word_word, $word_class, $table_name) {
@@ -99,6 +100,7 @@ class Jumpoff_Activator {
 			}
 
 		}
+		jo_initialize_db();
 		/*---------- /create database table for prompt words ---------------*/
 
 

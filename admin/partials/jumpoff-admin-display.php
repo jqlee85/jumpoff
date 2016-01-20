@@ -48,7 +48,7 @@ function jo_display_prompt_box() {
 		</ul>
 	</div>
 	<div id="jo_prompt" class="jo_hide"></div>
-	<input id="jo_prompt_me" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit" value="Prompt Me"/>
+	<input id="jo_prompt_me" class="jo_button" type="submit" value="Prompt Me"/>
 	<?php
 }
 
