@@ -499,16 +499,27 @@ class Jumpoff_Admin {
 	 		//get current timestamp
 	 	$timestamp = time();
 
+	 	// Create flow object
+		$my_post = array(
+		  'post_type'	  => 'flow',
+		  'post_title'    => $_POST['flow_title'],
+		  'post_content'  => $_POST['flow_content'],
+		  'post_status'   => 'draft'
+		);
+
+		// Insert the flow into the database as a flow
+		wp_insert_post( $my_post, true );
+
 	 	// Create post object
 		$my_post = array(
 		  'post_type'	  => 'post',
 		  'post_title'    => $_POST['flow_title'],
 		  'post_content'  => $_POST['flow_content'],
 		  'post_status'   => 'draft'
-		  //'post_author'   => $_POST['flow_author']
+		  
 		);
 
-		// Insert the post into the database
+		// Insert the post into the database as a post
 		$flow_id = wp_insert_post( $my_post, true );
 		$flow_data = array('flow_id' => $flow_id, 'edit_draft_link' => get_edit_post_link($flow_id, '') );
 		echo json_encode( $flow_data );
