@@ -73,9 +73,9 @@ function jo_display_flow_end_box() {
 	<div id="jo_flow_end_overlay">
 		
 		<div id="jo_flow_end_box">
-			<input id="jo_flow_archive" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--grey" type="submit" value="Done"/>
-			<input id="jo_flow_save_as_draft" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--grey" type="submit" value="Save As Draft"/>
-			<input id="jo_flow_edit_now" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--light-green" type="submit" value="Edit Now"/>
+			<div id="jo_star_flow" class="jo_star wp-menu-image dashicons-before dashicons-star-empty jo_recent_flow_edit" data-id="" data-star="false"></div>
+			<div id="jo_flow_done" class="jo_button" type="submit">Done</div>
+			<div id="jo_flow_edit_now" class="jo_button" type="submit">Edit as Post</div>
 		</div>
 	</div>
 	<?php
@@ -90,7 +90,7 @@ function jo_display_flow_counter() {
 
 function jo_display_jumpoff_logo() {
 	?>
-	<a id="jo_bottom_logo" href="http://jumpoff.io"><img src="<?php echo(plugin_dir_url( $file ).'jumpoff/assets/jumpoff-logo-wide-400.jpg'); ?>" alt="JumpOff Creative Writing App"/></a>
+	<a id="jo_bottom_logo" href="http://jumpoff.io" target="_blank"><img src="<?php echo(plugin_dir_url( $file ).'jumpoff/assets/jumpoff-logo-wide-400.jpg'); ?>" alt="JumpOff Creative Writing App"/></a>
 	<?php
 }
 

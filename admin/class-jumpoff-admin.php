@@ -435,8 +435,11 @@ class Jumpoff_Admin {
 
 		// Update the meta field in the database.
 		$is_success = update_post_meta( $flow_id, 'jumpoff_flow_flag', $is_starred );
+		$starred = get_post_meta($flow_id, 'jumpoff_flow_flag');
+		
 
-		echo json_encode( array( 'jo_success' => $is_success ) );
+
+		echo json_encode( array( 'jo_success' => $is_success, 'starred' => $starred ) );
 		wp_die();
 
 	}
@@ -498,17 +501,6 @@ class Jumpoff_Admin {
 
 	 		//get current timestamp
 	 	$timestamp = time();
-
-	 	// Create flow object
-		$my_post = array(
-		  'post_type'	  => 'flow',
-		  'post_title'    => $_POST['flow_title'],
-		  'post_content'  => $_POST['flow_content'],
-		  'post_status'   => 'draft'
-		);
-
-		// Insert the flow into the database as a flow
-		wp_insert_post( $my_post, true );
 
 	 	// Create post object
 		$my_post = array(

@@ -6,11 +6,11 @@
 /* Default WP Admin Styles */
 
 #wpwrap {
-	background-color: #2b2b2b;
+	background-color: #352C3D;
 }
 
 ul#adminmenu a.wp-has-current-submenu:after, ul#adminmenu>li.current>a.current:after {
-	border-right-color: #2b2b2b;
+	border-right-color: #352C3D;
 }
 
 #wpfooter {
@@ -35,18 +35,30 @@ ul#adminmenu a.wp-has-current-submenu:after, ul#adminmenu>li.current>a.current:a
 	width:100%;
 	height:auto;
 	min-height:800px;
-	background-color: #2b2b2b;
+	background-color: #352C3D;
 	padding:60px auto;
 	
 }
 
 /* Flow Archive */
 
+.jo_logo_header {
+	text-align:center;
+	display:block;
+	width:120px;
+	height:auto;
+	margin: 10px auto 0;
+}
+
 .jo_recent_flows_title {
 	text-align:center;
-	margin: 40px auto;
+	margin: 10px auto 20px;
 	color: #efefef;
 	font-size:20px;
+}
+
+#jo_flow_written_today{
+	color:#eee;
 }
 
 #jo_recent_flows_table {
@@ -110,11 +122,17 @@ ul#adminmenu a.wp-has-current-submenu:after, ul#adminmenu>li.current>a.current:a
 	margin:auto;
 }
 
-.jo_table_header {
-	
-	
-}
 
 #jo_recent_flows_table tr:nth-child(even) {
     background-color: #2a2e32;
+}
+
+.jo_recent_flow_edit {
+	color: #FBAD65 !important;
+	margin:auto;
+	text-align:center;
+}
+
+.jo_recent_flow_edit:hover {
+	background: #2B9883;
 }

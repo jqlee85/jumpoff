@@ -87,8 +87,10 @@
 		jQuery('#jo_prompt_me').click(function() {
 			//hide recent flows
 			jQuery('#jo_recent_flows_table').hide();
-			//hide flow time options
+			//hide flow time options and jumpoff image link
 			jQuery('#jo_prompt_times').fadeTo(0,0);
+			jQuery('#jo_bottom_logo').fadeTo(1000,0);
+			jQuery('#jo_bottom_logo').attr('href','#');
 
 			//get chosen flow length, default to 5 min if wrong value inputted
 			var flowTime = jQuery('.jo_prompt_time.jo_checked').data('value');
@@ -96,8 +98,7 @@
 				var sec = flowTime;
 			}
 			else { var sec = 300; }
-			console.log(flowTime);
-
+			sec = 3;
 			//start counter
 			jQuery('#jo_flow_counter').fadeTo(7000, 0);
 			var timer = setInterval(function() { 
@@ -107,15 +108,38 @@
 			    	clearInterval(timer);
 			   		jQuery('#jo_flow_end_overlay').addClass('jo_show');
 			   		jQuery('#jo_flow_box').blur();
+
+			   		//archive flow
+					console.log('archive click function ran');
+					var flowContent = jQuery('#jo_flow_box').val();
+					var flowTitle = jQuery('#jo_prompt').text();
+					console.log(flowTitle + ' and ' + flowContent);
+
+					var data_flow_archive  = {
+						'action': 'jo_archive_flow',
+						'flow_content': flowContent,
+						'flow_title': flowTitle
+					};
+
+					jQuery.post(ajaxurl, data_flow_archive, function(response) {
+						console.log('flow archived');
+						
+						var responseArray = jQuery.parseJSON(response);
+						jQuery('#jo_star_flow').attr('data-id' , responseArray.flow_id);
+						console.log(responseArray.flow_id);
+					});
+					
 			   }
 			}, 1000);
 			
 			//show the counter on hover
 			setTimeout(function() {
 				jQuery('#jo_flow_counter').hover(function() { 
-				    jQuery(this).stop().animate({"opacity": .7},200); 
+				    jQuery(this).stop().animate({"opacity": .7},200);
+				    jQuery('#jo_bottom_logo').animate({"opacity": 1}, 200); 
 				},function() { 
 				    jQuery(this).stop().animate({"opacity": 0},1000); 
+					jQuery('#jo_bottom_logo').stop().animate({"opacity": 0},1000); 
 				});
 			}, 10000);
 
@@ -165,44 +189,56 @@
 			});
 		});
 		
-		//archive flow
-		jQuery('#jo_flow_archive').click(function(){
-			console.log('archive click function ran');
-			var flowContent = jQuery('#jo_flow_box').val();
-			var flowTitle = jQuery('#jo_prompt').text();
-			console.log(flowTitle + ' and ' + flowContent);
 
-			var data_flow_archive  = {
-				'action': 'jo_archive_flow',
-				'flow_content': flowContent,
-				'flow_title': flowTitle
+		//star flow
+		
+		jQuery('#jo_star_flow').click(function(){
+			var flowID = jQuery('#jo_star_flow').data('id');
+			var flowIsStarred = jQuery('#jo_star_flow').attr('data-star');
+			if (flowIsStarred == '1') {var flowStar = false;}
+			else {var flowStar = true;}
+			
+
+			var data_flow_star  = {
+				'action': 'jo_save_flow_star',
+				'flow_id': flowID,
+				'is_starred': flowStar
 			};
 
-			jQuery.post(ajaxurl, data_flow_archive, function(response) {
-				console.log('response function ran for archiving flow');
-				location.reload();
-			});
-		});
-
-		//save flow as draft
-		jQuery('#jo_flow_save_as_draft').click(function(){
-			console.log('submit function ran');
-			var flowContent = jQuery('#jo_flow_box').val();
-			var flowTitle = jQuery('#jo_prompt').text();
-			console.log(flowTitle + ' and ' + flowContent);
-
-			var data_flow_save_draft  = {
-				'action': 'jo_save_flow_as_draft',
-				'flow_content': flowContent,
-				'flow_title': flowTitle
-			};
-
-			jQuery.post(ajaxurl, data_flow_save_draft, function(response) {
-				console.log('response function ran for save flow as draft');
-				location.reload();
+			jQuery.post(ajaxurl, data_flow_star, function(response) {
+				
+				var responseArray = jQuery.parseJSON(response);
+				console.log(responseArray.starred);
+				jQuery('#jo_star_flow').attr('data-star',responseArray.starred);
 			});
 
 		});
+
+		// Flow is done, reload page
+		jQuery('#jo_flow_done').click(function(){
+			location.reload();
+
+		});
+
+		// //save flow as draft
+		// jQuery('#jo_flow_save_as_draft').click(function(){
+		// 	console.log('submit function ran');
+		// 	var flowContent = jQuery('#jo_flow_box').val();
+		// 	var flowTitle = jQuery('#jo_prompt').text();
+		// 	console.log(flowTitle + ' and ' + flowContent);
+
+		// 	var data_flow_save_draft  = {
+		// 		'action': 'jo_save_flow_as_draft',
+		// 		'flow_content': flowContent,
+		// 		'flow_title': flowTitle
+		// 	};
+
+		// 	jQuery.post(ajaxurl, data_flow_save_draft, function(response) {
+		// 		console.log('response function ran for save flow as draft');
+		// 		location.reload();
+		// 	});
+
+		// });
 
 		//save flow as draft and edit
 		jQuery('#jo_flow_edit_now').click(function(){

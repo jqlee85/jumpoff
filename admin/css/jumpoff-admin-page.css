@@ -132,6 +132,29 @@ ul#adminmenu a.wp-has-current-submenu:after, ul#adminmenu>li.current>a.current:a
 	margin-top:360px;
 }
 
+#jo_star_flow {
+	display:inline-block;
+	height:60px;
+	width:60px;
+	margin:0 5px;
+}
+
+#jo_star_flow:before {
+	width:60px;
+	height:60px;
+	font-size:60px;
+	color:;
+	padding:0;
+	line-height:20px;
+	color: #FBAD65 !important;
+	cursor:pointer;
+}
+
+#jo_star_flow:before:hover {
+	color: #2B9883;
+}
+
+
 /* Flow Counter */
 
 #jo_flow_counter {
@@ -141,7 +164,7 @@ ul#adminmenu a.wp-has-current-submenu:after, ul#adminmenu>li.current>a.current:a
 	font-size: 80px;
 	line-height:90px;
 	margin:0 auto;
-	color:#555;
+	color:#eee;
 	opacity:1;
 	/*transition: opacity .5s ease-in-out;
    	-moz-transition: opacity .5s ease-in-out;
@@ -225,4 +248,5 @@ ul#adminmenu a.wp-has-current-submenu:after, ul#adminmenu>li.current>a.current:a
 	height:auto;
 
 }
+
 

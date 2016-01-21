@@ -57,7 +57,7 @@ function jo_recent_flows( $flows = false ) {
 		$query_args = array(
 			'post_type'      => 'flow',
 			'post_status'	 => 'draft, publish, pending',
-			'posts_per_page' => 10,
+			'posts_per_page' => 100,
 			'orderby'        => 'modified',
 			'order'          => 'DESC'
 		);
@@ -68,12 +68,13 @@ function jo_recent_flows( $flows = false ) {
  	}
 
 	
-	if ( count( $flows ) > 10 ) {
+	if ( count( $flows ) > 100 ) {
 		echo '<p class="view-all"><a href="' . esc_url( admin_url( 'edit.php?post_status=draft' ) ) . '">' . _x( 'View all', 'drafts' ) . "</a></p>\n";
  	}
+	echo '<img class="jo_logo_header" src="'.plugin_dir_url( $file ).'jumpoff/assets/jumpoff-logo-wide-400.jpg" alt="JumpOff Logo" />';
 	echo '<h2 class="hide-if-no-js jo_recent_flows_title">' . __( 'Recent Flows' ) . "</h2>";
 
-	$flows = array_slice( $flows, 0, 10 );
+	$flows = array_slice( $flows, 0, 100 );
 	foreach ( $flows as $flow ) {
 		
 		//get Flow edit link
@@ -106,7 +107,7 @@ function jo_recent_flows( $flows = false ) {
 				<input type="checkbox" class="jo_flow_star" name="jo_flow_star_<?php echo $flow->ID; ?>" id="jo_flow_star_<?php echo $flow->ID; ?>" <?php if ( $is_starred ) { ?>checked="checked"<?php } ?> />
 			</td>
 			<td>
-				<?php echo '<div class="flow_title"><a href="' . esc_url( $url ) . '" title="' . esc_attr( sprintf( __( 'Edit &#8220;%s&#8221;' ), $title ) ) . '"><button>Edit</button></a>';?>
+				<?php echo '<a href="' . esc_url( $url ) . '" title="' . esc_attr( sprintf( __( 'Edit &#8220;%s&#8221;' ), $title ) ) . '"><div class="wp-menu-image dashicons-before dashicons-edit jo_recent_flow_edit"><br></div></a>';?>
 			</td>
 		</tr>
 		<?php
