@@ -98,7 +98,7 @@
 				var sec = flowTime;
 			}
 			else { var sec = 300; }
-			sec = 3;
+			
 			//start counter
 			jQuery('#jo_flow_counter').fadeTo(7000, 0);
 			var timer = setInterval(function() { 
