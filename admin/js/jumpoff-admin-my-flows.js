@@ -33,19 +33,14 @@
 
 		//on click, change star/unstar value for post
 		jQuery('.jo_flow_star').click(function(){
-
 			
-			
-
 			//get id
 			var raw_id = jQuery(this).attr('id');
 			var id_array = raw_id.split('_');
 			var flow_id = parseInt( id_array[id_array.length - 1] );
-			console.log(flow_id);
 
 			//get if checked
-			var is_starred = jQuery(this).attr('checked');
-			console.log(is_starred);
+			var is_starred = jQuery(this).attr('data-checked');
 
 			var data = {
 				'action': 'jo_save_flow_star',
@@ -55,10 +50,19 @@
 
 			jQuery.post(ajaxurl, data, function(response) {
 				console.log(response);
+				
+				//update checked value on flow if successful
+				if (response['success'] == true){
+						flow_id = '#jo_flow_star_' + response['data']['id'];
+						var checked = response['data']['starred'];
+						jQuery(flow_id).attr('data-checked', checked );
+				}
+				
 			});
 
 
 		});
+
 
 
 	});

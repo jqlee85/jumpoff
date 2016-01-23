@@ -28,12 +28,10 @@ function jumpoff_page() {
 		jo_display_prompt_box();
 		
 		jo_display_flow_box();
-
-		jo_display_flow_counter();
-
-		jo_display_jumpoff_logo();
+	
 
 	echo '</div>';
+
 
 }
 
@@ -43,8 +41,8 @@ function jo_display_prompt_box() {
 	<div id="jo_prompt_times_container">
 		<?php // CHANGE to customized elements with data attributes instead of radio buttons, make the length is the button, with a border or color change to indicate selected value ?>
 		<ul id="jo_prompt_times">
-			<li class="jo_prompt_time jo_checked" id="jo_prompt_time_20" data-value="20">20<br><span>sec</span></li>
-			<li class="jo_prompt_time" id="jo_prompt_time_60" data-value="60">1<br><span>min</span></li>
+			<li class="jo_prompt_time jo_checked" id="jo_prompt_time_60" data-value="60">1<br><span>min</span></li>
+			<li class="jo_prompt_time" id="jo_prompt_time_120" data-value="120">2<br><span>min</span></li>
 			<li class="jo_prompt_time" id="jo_prompt_time_300" data-value="300">5<br><span>min</span></li>	
 			<li class="jo_prompt_time" id="jo_prompt_time_600" data-value="600">10<br><span>min</span></li>
 		</ul>
@@ -70,29 +68,31 @@ function jo_display_flow_box() {
 //display overlay at end of flow
 function jo_display_flow_end_box() {
 	?>
+	<div id="jo_flow_counter_wrapper">
+		<div id="jo_flow_counter_container">
+			<div id="jo_show_counter"></div>
+			<div id="jo_flow_counter"></div>
+			<div id="jo_flow_end"></div>
+		</div>
+	</div>
 	<div id="jo_flow_end_overlay">
 		
 		<div id="jo_flow_end_box">
-			<div id="jo_star_flow" class="jo_star wp-menu-image dashicons-before dashicons-star-empty jo_recent_flow_edit" data-id="" data-star="false"></div>
+			<div id="jo_flow_star" class="jo_flow_star" data-checked=""></div>
 			<div id="jo_flow_done" class="jo_button" type="submit">Done</div>
 			<div id="jo_flow_edit_now" class="jo_button" type="submit">Edit as Post</div>
 		</div>
+
 	</div>
+	
+
 	<?php
 }
 
-//display timer
-function jo_display_flow_counter() {
-	?>
-	<div id="jo_flow_counter"></div>
-	<?php
-}
 
-function jo_display_jumpoff_logo() {
-	?>
-	<a id="jo_bottom_logo" href="http://jumpoff.io" target="_blank"><img src="<?php echo(plugin_dir_url( $file ).'jumpoff/assets/jumpoff-logo-wide-400.jpg'); ?>" alt="JumpOff Creative Writing App"/></a>
-	<?php
-}
+
+
+
 
 jumpoff_page();
 

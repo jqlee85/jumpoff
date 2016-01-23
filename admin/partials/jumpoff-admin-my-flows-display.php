@@ -24,6 +24,7 @@ function jumpoff_my_flows_page() {
 
 	echo '</div>';
 
+
 }
 
 
@@ -43,23 +44,19 @@ function jo_display_flow_archive() {
 			
 			<?php 
 			//echo most recent flows 
-			jo_recent_flows();
-			?>
-			 
-		</table>
-	</div>
-	<?php
-}
+			//get query var
+	$paged = ( get_query_var('page') ) ? get_query_var('page') : 1;
 
-function jo_recent_flows( $flows = false ) {
-	
+	$max_flows = 999;
+
 	if ( ! $flows ) {
 		$query_args = array(
 			'post_type'      => 'flow',
 			'post_status'	 => 'draft, publish, pending',
-			'posts_per_page' => 100,
+			'posts_per_page' => $max_flows,
 			'orderby'        => 'modified',
-			'order'          => 'DESC'
+			'order'          => 'DESC',
+			'paged'			 => '$paged'
 		);
 		$flows = get_posts( $query_args );
 		if ( ! $flows ) {
@@ -68,13 +65,13 @@ function jo_recent_flows( $flows = false ) {
  	}
 
 	
-	if ( count( $flows ) > 100 ) {
+	if ( count( $flows ) > $max_flows ) {
 		echo '<p class="view-all"><a href="' . esc_url( admin_url( 'edit.php?post_status=draft' ) ) . '">' . _x( 'View all', 'drafts' ) . "</a></p>\n";
  	}
 	echo '<img class="jo_logo_header" src="'.plugin_dir_url( $file ).'jumpoff/assets/jumpoff-logo-wide-400.jpg" alt="JumpOff Logo" />';
 	echo '<h2 class="hide-if-no-js jo_recent_flows_title">' . __( 'Recent Flows' ) . "</h2>";
 
-	$flows = array_slice( $flows, 0, 100 );
+	$flows = array_slice( $flows, 0, $max_flows );
 	foreach ( $flows as $flow ) {
 		
 		//get Flow edit link
@@ -104,7 +101,7 @@ function jo_recent_flows( $flows = false ) {
  				}?></p>
  			</td>
 			<td>
-				<input type="checkbox" class="jo_flow_star" name="jo_flow_star_<?php echo $flow->ID; ?>" id="jo_flow_star_<?php echo $flow->ID; ?>" <?php if ( $is_starred ) { ?>checked="checked"<?php } ?> />
+				<div class="jo_flow_star" name="jo_flow_star_<?php echo $flow->ID; ?>" id="jo_flow_star_<?php echo $flow->ID; ?>" data-checked="<?php if ( $is_starred ) { echo 1; } ?>" ></div>
 			</td>
 			<td>
 				<?php echo '<a href="' . esc_url( $url ) . '" title="' . esc_attr( sprintf( __( 'Edit &#8220;%s&#8221;' ), $title ) ) . '"><div class="wp-menu-image dashicons-before dashicons-edit jo_recent_flow_edit"><br></div></a>';?>
@@ -112,7 +109,16 @@ function jo_recent_flows( $flows = false ) {
 		</tr>
 		<?php
 	}//end foreach
+
+
+			?>
+			 
+		</table>
+
+	</div>
+	<?php
 }
+
 
 jumpoff_my_flows_page();
 

@@ -88,24 +88,31 @@
 			//hide recent flows
 			jQuery('#jo_recent_flows_table').hide();
 			//hide flow time options and jumpoff image link
-			jQuery('#jo_prompt_times').fadeTo(0,0);
-			jQuery('#jo_bottom_logo').fadeTo(1000,0);
-			jQuery('#jo_bottom_logo').attr('href','#');
+			jQuery('#jo_prompt_times_container').hide();
+			jQuery('#jo_flow_counter_wrapper').show();
+			
 
 			//get chosen flow length, default to 5 min if wrong value inputted
 			var flowTime = jQuery('.jo_prompt_time.jo_checked').data('value');
-			if ( flowTime == 20 || flowTime == 60 || flowTime == 300 || flowTime == 600 ){
+			if ( flowTime == 60 || flowTime == 120 || flowTime == 300 || flowTime == 600 ){
 				var sec = flowTime;
 			}
 			else { var sec = 300; }
 			
+			//end timer if end button clicked
+			jQuery('#jo_flow_end').click(function(){
+				sec = 0;
+			});
+
 			//start counter
 			jQuery('#jo_flow_counter').fadeTo(7000, 0);
 			var timer = setInterval(function() { 
 			   sec--;
+			 
 			   jQuery('#jo_flow_counter').text(getFormattedTime(sec,0,2));
 			   if (sec < 1) {
 			    	clearInterval(timer);
+			   		jQuery('#jo_flow_counter_wrapper').hide();
 			   		jQuery('#jo_flow_end_overlay').addClass('jo_show');
 			   		jQuery('#jo_flow_box').blur();
 
@@ -123,23 +130,24 @@
 
 					jQuery.post(ajaxurl, data_flow_archive, function(response) {
 						console.log('flow archived');
-						
-						var responseArray = jQuery.parseJSON(response);
-						jQuery('#jo_star_flow').attr('data-id' , responseArray.flow_id);
-						console.log(responseArray.flow_id);
+						console.log(response['data']['flow_id']);
+						jQuery('#jo_flow_star').attr('id' , '#jo_flow_star_' + response['data']['flow_id']);
+						console.log(response);
 					});
 					
 			   }
 			}, 1000);
+
+
 			
 			//show the counter on hover
 			setTimeout(function() {
-				jQuery('#jo_flow_counter').hover(function() { 
-				    jQuery(this).stop().animate({"opacity": .7},200);
-				    jQuery('#jo_bottom_logo').animate({"opacity": 1}, 200); 
+				jQuery('#jo_show_counter').hover(function() { 
+				    jQuery('#jo_flow_counter').stop().animate({"opacity": .7},200);
+					// jQuery('#jo_flow_end').stop().animate({"opacity": .7},200);
 				},function() { 
-				    jQuery(this).stop().animate({"opacity": 0},1000); 
-					jQuery('#jo_bottom_logo').stop().animate({"opacity": 0},1000); 
+				    jQuery('#jo_flow_counter').stop().animate({"opacity": 0},1000); 
+				    // jQuery('#jo_flow_end').stop().animate({"opacity": 0},1000); 
 				});
 			}, 10000);
 
@@ -189,30 +197,39 @@
 			});
 		});
 		
-
-		//star flow
-		
-		jQuery('#jo_star_flow').click(function(){
-			var flowID = jQuery('#jo_star_flow').data('id');
-			var flowIsStarred = jQuery('#jo_star_flow').attr('data-star');
-			if (flowIsStarred == '1') {var flowStar = false;}
-			else {var flowStar = true;}
+		//on click, change star/unstar value for post
+		jQuery('.jo_flow_star').click(function(){
 			
+			//get id
+			var raw_id = jQuery(this).attr('id');
+			var id_array = raw_id.split('_');
+			var flow_id = parseInt( id_array[id_array.length - 1] );
 
-			var data_flow_star  = {
+			//get if checked
+			var is_starred = jQuery(this).attr('data-checked');
+
+			var data = {
 				'action': 'jo_save_flow_star',
-				'flow_id': flowID,
-				'is_starred': flowStar
+				'flow_id': flow_id,
+				'is_starred': is_starred
 			};
 
-			jQuery.post(ajaxurl, data_flow_star, function(response) {
+			jQuery.post(ajaxurl, data, function(response) {
+				console.log(response);
 				
-				var responseArray = jQuery.parseJSON(response);
-				console.log(responseArray.starred);
-				jQuery('#jo_star_flow').attr('data-star',responseArray.starred);
+				//update checked value on flow if successful
+				if (response['success'] == true){
+						
+						var checked = response['data']['starred'];
+						console.log(flow_id + '  ' + checked);
+						jQuery('.jo_flow_star').attr('data-checked', checked );
+				}
+				
 			});
-
 		});
+
+		
+
 
 		// Flow is done, reload page
 		jQuery('#jo_flow_done').click(function(){
@@ -220,25 +237,6 @@
 
 		});
 
-		// //save flow as draft
-		// jQuery('#jo_flow_save_as_draft').click(function(){
-		// 	console.log('submit function ran');
-		// 	var flowContent = jQuery('#jo_flow_box').val();
-		// 	var flowTitle = jQuery('#jo_prompt').text();
-		// 	console.log(flowTitle + ' and ' + flowContent);
-
-		// 	var data_flow_save_draft  = {
-		// 		'action': 'jo_save_flow_as_draft',
-		// 		'flow_content': flowContent,
-		// 		'flow_title': flowTitle
-		// 	};
-
-		// 	jQuery.post(ajaxurl, data_flow_save_draft, function(response) {
-		// 		console.log('response function ran for save flow as draft');
-		// 		location.reload();
-		// 	});
-
-		// });
 
 		//save flow as draft and edit
 		jQuery('#jo_flow_edit_now').click(function(){

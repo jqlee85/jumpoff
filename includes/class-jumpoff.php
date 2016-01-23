@@ -74,6 +74,7 @@ class Jumpoff {
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
+		$this->define_ajax_hooks();
 
 	}
 
@@ -110,6 +111,11 @@ class Jumpoff {
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-jumpoff-admin.php';
+
+		/**
+		 * The class responsible for defining all actions that occur in the admin area.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'ajax/class-jumpoff-ajax.php';
 
 		$this->loader = new Jumpoff_Loader();
 
@@ -179,13 +185,25 @@ class Jumpoff {
 
 		//Dashboard Widget
 		$this->loader->add_action( 'wp_dashboard_setup', $plugin_admin, 'jo_dashboard_widget', 99 );
-		
-		//JumpOff AJAX Handling
-		$this->loader->add_action( 'wp_ajax_jo_get_new_prompt', $plugin_admin, 'jo_get_new_prompt_callback' );
-		$this->loader->add_action( 'wp_ajax_jo_save_flow_as_draft', $plugin_admin, 'jo_save_flow_as_draft');
-		$this->loader->add_action( 'wp_ajax_jo_archive_flow', $plugin_admin, 'jo_archive_flow');
-		$this->loader->add_action( 'wp_ajax_jo_save_flow_star', $plugin_admin, 'jo_save_flow_star');
 
+	}
+
+	/**
+	 * Register all of the hooks related to the AJAX area functionality
+	 * of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function define_ajax_hooks() {
+
+		$plugin_ajax = new JumpOff_AJAX( $this->get_plugin_name(), $this->get_version() );
+
+		//JumpOff AJAX Handling
+		$this->loader->add_action( 'wp_ajax_jo_get_new_prompt', $plugin_ajax, 'jo_get_new_prompt_callback' );
+		$this->loader->add_action( 'wp_ajax_jo_save_flow_as_draft', $plugin_ajax, 'jo_save_flow_as_draft');
+		$this->loader->add_action( 'wp_ajax_jo_archive_flow', $plugin_ajax, 'jo_archive_flow');
+		$this->loader->add_action( 'wp_ajax_jo_save_flow_star', $plugin_ajax, 'jo_save_flow_star');
 
 	}
 
