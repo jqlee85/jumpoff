@@ -8,6 +8,7 @@
 	width:100%;
 	height:auto;
 	text-align:center;
+	position:relative;
 }
 
 #jo_dash_widget_logo {
@@ -85,4 +86,23 @@
 	float:right;
 	box-shadow:1px 1px 3px rgba(0,0,0,.2);
 }
+
+/* Contact Info */
+
+.jo_contact_info {
+	position:relative;
+	width:100%;
+	text-align:center;
+	height:auto;
+}
+
+.jo_contact_info p {
+	color:rgba(255,255,255,.3);
+	font-size:10px;
+}
+
+.jo_contact_info a {
+	color:#FBAD65;
+}
+
 

@@ -41,6 +41,10 @@ function jumpoff_dashboard_widget() {
 		$jumpoff_url = admin_url($path);?>
 		<a href="<?php echo $jumpoff_url; ?>"><input id="jo_start_flowing" class="jo_button" value="Start Writing!"/></a>
 
+		<div class="jo_contact_info">
+			<p>Thanks for using <a href="http://jumpoff.io" target="_blank">JumpOff</a>!<br>If you have any questions/suggestions email jesse@jumpoff.io</p>
+		</div>
+
 	</div>
 	<?php
 }

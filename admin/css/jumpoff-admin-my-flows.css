@@ -5,6 +5,10 @@
 
 /* Default WP Admin Styles */
 
+html {
+	background-color: #352C3D !important;
+}
+
 #wpwrap {
 	background-color: #352C3D;
 }
