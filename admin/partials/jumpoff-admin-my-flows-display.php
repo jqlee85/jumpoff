@@ -97,7 +97,7 @@ function jo_display_flow_archive() {
 			</td>
 			<td class="jo_hide_sm">
 				<p><?php if ( $the_content = wp_trim_words( $flow->post_content, 10 ) ) {
-				echo $the_content;
+				echo esc_html__($the_content);
  				}?></p>
  			</td>
 			<td>

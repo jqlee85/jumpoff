@@ -144,12 +144,10 @@
 			setTimeout(function() {
 				jQuery('#jo_show_counter').hover(function() { 
 				    jQuery('#jo_flow_counter').stop().animate({"opacity": .7},200);
-					// jQuery('#jo_flow_end').stop().animate({"opacity": .7},200);
 				},function() { 
 				    jQuery('#jo_flow_counter').stop().animate({"opacity": 0},1000); 
-				    // jQuery('#jo_flow_end').stop().animate({"opacity": 0},1000); 
 				});
-			}, 10000);
+			}, 10);
 
 			//hide prompt me button when clicked
 			jQuery(this).removeClass('jo_show').addClass('jo_hide');

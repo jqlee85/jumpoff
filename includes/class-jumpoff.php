@@ -159,6 +159,13 @@ class Jumpoff {
 		//Save Star metabox with Flow post save
 		$this->loader->add_action('save_post', $plugin_admin, 'jo_save_post_flag' );
 
+		//Add Edit as Post button to flow edit page
+		$this->loader->add_action( 'post_submitbox_start', $plugin_admin, 'jo_edit_as_post');
+
+		//Hide Publishing stuff from Flow edit pages
+		$this->loader->add_action( 'admin_head-post.php', $plugin_admin, 'jo_hide_publishing_actions' );
+		$this->loader->add_action( 'admin_head-post-new.php', $plugin_admin, 'jo_hide_publishing_actions' );
+
 		//JumpOff Admin Menu
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'jumpoff_menu' );
 		
@@ -204,6 +211,7 @@ class Jumpoff {
 		$this->loader->add_action( 'wp_ajax_jo_save_flow_as_draft', $plugin_ajax, 'jo_save_flow_as_draft');
 		$this->loader->add_action( 'wp_ajax_jo_archive_flow', $plugin_ajax, 'jo_archive_flow');
 		$this->loader->add_action( 'wp_ajax_jo_save_flow_star', $plugin_ajax, 'jo_save_flow_star');
+		$this->loader->add_action( 'wp_ajax_jo_save_flow_as_post', $plugin_ajax, 'jo_save_flow_as_post');
 
 	}
 

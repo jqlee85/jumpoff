@@ -415,4 +415,52 @@ class Jumpoff_Admin {
 		update_post_meta( $post_id, 'jumpoff_flow_flag', $is_starred );
 	}
 
+	/**
+	 * Display button to edit flow as a post
+	 *
+	 *@since 	  1.0.0
+	 *
+	 */
+	public function jo_edit_as_post() {
+		
+		$my_post_type = 'flow';
+
+		global $post;
+		
+		if($post->post_type == $my_post_type){
+			$flow_id = $post->ID; 
+			print '<a href="#"><div id="jo_edit_as_post_'.$post->ID.'" class="jo_edit_as_post jo_button">Edit as Post</div></a>';
+		}
+
+
+	}
+
+
+	/**
+	 * Remove publishing actions from flow edit pages
+	 *
+	 *@since 	  1.0.0
+	 *@param int $post_id The ID flow on which the button is showing.
+	 */
+	public function jo_hide_publishing_actions() {
+		
+		$my_post_type = 'flow';
+        global $post;
+        
+        error_log($my_post_type . '  ' . $post->post_type );
+        if($post->post_type == $my_post_type){
+            echo '
+                <style type="text/css">
+                    #misc-publishing-actions,
+                    #publishing-action {
+                        display:none;
+                    }
+                    #save-action {
+                    	height:40px;
+                	}
+                </style>
+            ';
+        }
+	}
+
 }

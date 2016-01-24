@@ -166,8 +166,8 @@ class Jumpoff_AJAX {
 	 	// Create post object
 		$my_post = array(
 		  'post_type'	  => 'post',
-		  'post_title'    => $_POST['flow_title'],
-		  'post_content'  => $_POST['flow_content'],
+		  'post_title'    => sanitize_text_field($_POST['flow_title']),
+		  'post_content'  => sanitize_text_field($_POST['flow_content']),
 		  'post_status'   => 'draft'
 		  
 		);
@@ -177,6 +177,36 @@ class Jumpoff_AJAX {
 		$flow_data = array('flow_id' => $flow_id, 'edit_draft_link' => get_edit_post_link($flow_id, '') );
 		echo json_encode( $flow_data );
 		wp_die(); // this is required to terminate immediately and return a proper response
+
+	}
+
+	/**
+	 * Saves a Flow as a Post draft
+	 *
+	 *@since 	  1.0.0
+	 *
+	 */
+	public function jo_save_flow_as_post() {
+
+		global $wpdb; // this is how you get access to the database
+		
+
+	 	// Create post object
+		$my_post = array(
+		  'post_type'	  => 'post',
+		  'post_title'    => $_POST['flow_title'],
+		  'post_content'  => $_POST['flow_content'],
+		  'post_status'   => 'draft'
+		);
+
+		// Insert the post into the database as a post
+		$flow_id = wp_insert_post( $my_post, true );
+		$flow_data = array(
+			'flow_id' => $flow_id, 
+			'edit_draft_link' => get_edit_post_link($flow_id, '') 
+
+		);
+		wp_send_json_success( $flow_data  );
 
 	}
 
