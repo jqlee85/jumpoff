@@ -66,16 +66,14 @@ ul#adminmenu a.wp-has-current-submenu:after, ul#adminmenu>li.current>a.current:a
 }
 
 #jo_recent_flows_table {
-	padding-right: 10px;
+	padding: 0 10px 60px 0;
 }
 
 #jo_recent_flows_table table {
-	
 	color: #efefef;
 	background-color:#2F3438;
 	border-radius:4px;
 	border-collapse: collapse;
-	
 }
 
 @media screen and (max-width:782px) {
