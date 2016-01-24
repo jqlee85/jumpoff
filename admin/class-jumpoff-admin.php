@@ -429,7 +429,7 @@ class Jumpoff_Admin {
 		
 		if($post->post_type == $my_post_type){
 			$flow_id = $post->ID; 
-			print '<a href="#"><div id="jo_edit_as_post_'.$post->ID.'" class="jo_edit_as_post jo_button">Edit as Post</div></a>';
+			print '<a href="#"><div id="jo_edit_as_post_'.$post->ID.'" class="jo_edit_as_post jo_button">Clone to Post</div></a>';
 		}
 
 
