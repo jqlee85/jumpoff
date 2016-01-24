@@ -254,7 +254,7 @@ class Jumpoff_Admin {
 
 	  if( is_admin() && isset($post_type) ){
 			if( ($pagenow == 'edit.php' || $pagenow == 'post.php' ) && $post_type == 'flow' )  {
-				wp_enqueue_style( 'jumpoff_hide_add_new_css', '/wp-content/plugins/jumpoff/css/hide-add-new.css');
+				wp_enqueue_style( 'jumpoff_hide_add_new_css', '/wp-content/plugins/jumpoff/admin/css/jumpoff-hide-add-new.css');
 			}  
 		}
 

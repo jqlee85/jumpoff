@@ -1,18 +1,18 @@
 === Plugin Name ===
 Contributors: jqlee85
-Donate link: http://jessequinnlee.com
-Tags: creative writing, prompt generator, brainstorming, writing tools
+Donate link: http://jumpoff.io
+Tags: creative writing, prompt generator, brainstorming, writing tools, freewriting, blogging ideas, short stories, writing prompts
 Requires at least: 4.0.0
 Tested up to: 4.4
 Stable tag: 4.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.
+Thie is a Beta version of JumpOff, a creating writing plugin that generates random writing prompts and freewriting exercises to get the creative juices flowing.
 
 == Description ==
 
-JumpOff is a creative writing plugin for WordPress. It aims to promote creativity by providing prompts and promoting the practice of freewriting.
+JumpOff is a creative writing plugin for WordPress. It aims to promote creativity by providing prompts and promoting the practice of freewriting. Just click
 
 == Installation ==
 
@@ -22,13 +22,26 @@ JumpOff is a creative writing plugin for WordPress. It aims to promote creativit
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+=How does it work?=
+Just click a button and you’ll receive a randomly generated prompt to get the brain firing. Then write until it stops you. We call these exercises "Flows." The purpose of the exercise is stream-of-consciousness writing. Don't overthink, don't edit, just write the first thing that comes to your mind and keep moving.
 
-An answer to that question.
+=Why can't I delete text or go back?=
+This is intentional. By removing the ability to edit your flows, fix your typos, or second-guess your word choice, we free you up to stay in a state of flow. When the exercise is done, you can edit all you want, but for now, just keep getting thoughts from brain to screen. We hope to help inspire creative writing of all sorts, and make writing as simple as possible, so you can do it every day.
 
-= What about foo bar? =
+=What happens to the writing?=
+It’s up to you. When you’re done with one prompt you can click done to start another Flow, or open your writing as a Post draft and edit, shape or add to it. At the end of every Flow, JumpOff will save all your writing and the prompts that inspired it. You can access/edit old Flows in the My Flows section.
 
-Answer to foo bar dilemma.
+=Can I publish Flows?=
+Not yet. Flows are writing exercises that aren't meant to be published themselves, but from the Flow's edit page, you can clone the flow as a Post, then publish that post.
+
+=What are the stars?=
+You can star Flows for any reason you like, but we like to star the writing we want to revisit. Maybe we want to develop an idea further, or create a blog post, short story, novel or piece of art inspired by one of our Flows.
+
+=What are the numbers in the dashboard widget?=
+The "Flow Streak" number is your current number of consecutive days doing at least one Flow exercise. The "Last 30 Days" number is the number of Flow exercises completed in the last 30 days. Simple enough, huh?
+
+=I have an idea about how to improve JumpOff, who do I tell?=
+Email jesse@jumpoff.io, We're always looking for ways to make JumpOff more useful, so we love getting feedback, positive or negative.
 
 == Screenshots ==
 
@@ -40,48 +53,10 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 == Changelog ==
 
-= 1.0 =
-* A change since the previous version.
-* Another change.
+= 0.5 =
+* Beta Finalized
 
 = 0.5 =
-* List versions from most recent at top to oldest at bottom.
 
 == Upgrade Notice ==
 
-= 1.0 =
-Upgrade notices describe the reason a user should upgrade.  No more than 300 characters.
-
-= 0.5 =
-This version fixes a security related bug.  Upgrade immediately.
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation."  Arbitrary sections will be shown below the built-in sections outlined above.
-
-== A brief Markdown Example ==
-
-Ordered list:
-
-1. Some feature
-1. Another feature
-1. Something else about the plugin
-
-Unordered list:
-
-* something
-* something else
-* third thing
-
-Here's a link to [WordPress](http://wordpress.org/ "Your favorite software") and one to [Markdown's Syntax Documentation][markdown syntax].
-Titles are optional, naturally.
-
-[markdown syntax]: http://daringfireball.net/projects/markdown/syntax
-            "Markdown is what the parser uses to process much of the readme file"
-
-Markdown uses email style notation for blockquotes and I've been told:
-> Asterisks for *emphasis*. Double it up  for **strong**.
-
-`<?php code(); // goes in backticks ?>`
