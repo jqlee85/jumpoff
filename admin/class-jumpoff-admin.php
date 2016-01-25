@@ -3,8 +3,8 @@
 /**
  * The admin-specific functionality of the plugin.
  *
- * @link       http://jessequinnlee.com
- * @since      1.0.0
+ * @link       http://jumpoff.io
+ * @since      0.5.0
  *
  * @package    Jumpoff
  * @subpackage Jumpoff/admin
@@ -25,7 +25,7 @@ class Jumpoff_Admin {
 	/**
 	 * The ID of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      string    $plugin_name    The ID of this plugin.
 	 */
@@ -34,7 +34,7 @@ class Jumpoff_Admin {
 	/**
 	 * The version of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      string    $version    The current version of this plugin.
 	 */
@@ -43,7 +43,7 @@ class Jumpoff_Admin {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @param      string    $plugin_name       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
@@ -57,7 +57,7 @@ class Jumpoff_Admin {
 	/**
 	 * Register the stylesheets for the WordPress admin area.
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 */
 	public function enqueue_styles() {
 
@@ -80,7 +80,7 @@ class Jumpoff_Admin {
 	/**
 	 * Register the stylesheets for just the JumpOff admin page.
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 */
 	public function jo_page_enqueue_styles($hook) {
 		
@@ -95,7 +95,7 @@ class Jumpoff_Admin {
 	/**
 	 * Register the stylesheets for just the My Flows admin page.
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 */
 	public function jo_my_flows_enqueue_styles($hook) {
 
@@ -111,7 +111,7 @@ class Jumpoff_Admin {
 	/**
 	 * Register the JavaScript for the admin area.
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 */
 	public function enqueue_scripts() {
 
@@ -122,7 +122,7 @@ class Jumpoff_Admin {
 	/**
 	 * Register the JavaScript for the JumpOff Admin Page.
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 */
 	public function jo_page_enqueue_scripts($hook) {
 
@@ -137,7 +137,7 @@ class Jumpoff_Admin {
 	/**
 	 * Register the JavaScript for the JumpOff Admin Page.
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 */
 	public function jo_my_flows_enqueue_scripts($hook) {
 
@@ -152,7 +152,7 @@ class Jumpoff_Admin {
 	/**
 	 * Add admin menu item for JumpOff
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 */
 	public function jumpoff_menu() {
 		
@@ -182,7 +182,7 @@ class Jumpoff_Admin {
 	/**
 	 * Register Custom Post Type
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 */
 	public function jo_flow_cpt() {
 		
@@ -242,7 +242,7 @@ class Jumpoff_Admin {
 	/**
 	 * Disable creating new posts through default interface
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 */	
 	public function jo_disable_new_posts() {
 
@@ -263,7 +263,7 @@ class Jumpoff_Admin {
 	/**
 	 * Display JumpOff Page
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 */
 	public function jumpoff_show_page() {
 
@@ -274,7 +274,7 @@ class Jumpoff_Admin {
 	/**
 	 * Display JumpOff Flows Page
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 */
 	public function jumpoff_show_my_flows_page() {
 
@@ -285,7 +285,7 @@ class Jumpoff_Admin {
 	/**
 	 * Display JumpOff DashBoard Widget
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 */
 	public function jo_dash_widget_display() {
 
@@ -297,7 +297,7 @@ class Jumpoff_Admin {
 	/**
 	 * Register Dashboard Widget
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 */
 	public function jo_dashboard_widget() {
 
@@ -322,7 +322,7 @@ class Jumpoff_Admin {
 	/**
 	 * Add flow star meta box to flow posts
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 */	
 	public function jo_add_flow_meta_boxes() {
 
@@ -339,7 +339,7 @@ class Jumpoff_Admin {
 	/**
 	 * Display flow Star custom meta box
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 */	
 	public function jo_flow_star_meta_box($post) { 
 
@@ -362,7 +362,7 @@ class Jumpoff_Admin {
 	/**
 	 * When the post is saved, saves flag/no flag for Flow.
 	 *
-	 *@since 	  1.0.0
+	 *@since 	  0.5.0
 	 *@param int $post_id The ID of the post being saved.
 	 */
 	public function jo_save_post_flag( $post_id ) {
@@ -418,7 +418,7 @@ class Jumpoff_Admin {
 	/**
 	 * Display button to edit flow as a post
 	 *
-	 *@since 	  1.0.0
+	 *@since 	  0.5.0
 	 *
 	 */
 	public function jo_edit_as_post() {
@@ -439,7 +439,7 @@ class Jumpoff_Admin {
 	/**
 	 * Remove publishing actions from flow edit pages
 	 *
-	 *@since 	  1.0.0
+	 *@since 	  0.5.0
 	 *@param int $post_id The ID flow on which the button is showing.
 	 */
 	public function jo_hide_publishing_actions() {
@@ -452,7 +452,7 @@ class Jumpoff_Admin {
             echo '
                 <style type="text/css">
                     #misc-publishing-actions,
-                    #publishing-action {
+                    #publishing-action, #preview-action {
                         display:none;
                     }
                     #save-action {
