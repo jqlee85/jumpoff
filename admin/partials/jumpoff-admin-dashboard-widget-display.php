@@ -6,7 +6,7 @@
  * This file is used to markup the admin-facing aspects of the plugin.
  *
  * @link       http://jessequinnlee.com
- * @since      1.0.0
+ * @since      0.5.0
  *
  * @package    Jumpoff
  * @subpackage Jumpoff/admin/partials
@@ -22,17 +22,22 @@ function jumpoff_dashboard_widget() {
 		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 	}
 	?>
+	<? //set flow streak 
+		$jo_flow_streak = jo_flow_streak();
+		$jo_flows_in_last_30_days = jo_flows_in_last_days(30);
+	?>
+
 	<div id="jo_dash_widget_wrapper">
 		<img id="jo_dash_widget_logo" src="<?php echo(plugin_dir_url().'jumpoff/assets/jumpoff-logo-wide-400.jpg'); ?>" alt="JumpOff Logo" />
-		<div id="jo_flow_written_today"><?php if ( !jo_flow_streak()['today'] ) { echo('Need Flow Today For Streak'); } ?></div>
+		<div id="jo_flow_written_today"><?php if ( !$jo_flow_streak['today'] ) { echo('Need Flow Today For Streak'); } ?></div>
 		<table id="jo_dash_stats">
 			<tr id="jo_flow_streak">
 				<td class="jo_stat_text">Flow Streak</td>
-				<td class="jo_stat_number"><?php echo( jo_flow_streak()['streak'] ); ?></td>
+				<td class="jo_stat_number"><?php echo( $jo_flow_streak['streak'] ); ?> <span>Day<?php if ( $jo_flow_streak['streak'] != 1 ){ echo 's';  }?></span></td>
 			</tr>
 			<tr id="jo_last_week_counter">
 				<td class="jo_stat_text">Last 30 Days</td>
-				<td class="jo_stat_number"><?php echo( jo_flows_in_last_days(30) ); ?></td>
+				<td class="jo_stat_number"><?php echo( $jo_flows_in_last_30_days ); ?> <span>Flow<?php if ( $jo_flows_in_last_30_days != 1 ){ echo 's';  }?></span></td>
 			</tr>
 
 		</table>

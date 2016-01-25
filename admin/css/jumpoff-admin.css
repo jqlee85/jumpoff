@@ -62,6 +62,10 @@
 	margin:auto;
 }
 
+#jo_dash_stats span {
+	font-size:13px;
+}
+
 #jo_dash_stats tr {
 	height:24px;
 }
