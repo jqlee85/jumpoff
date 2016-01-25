@@ -8,15 +8,15 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              http://jessequinnlee.com
- * @since             1.0.0
+ * @link              http://jumpoff.io/beta
+ * @since             0.5.0
  * @package           Jumpoff
  *
  * @wordpress-plugin
  * Plugin Name:       JumpOff
- * Plugin URI:        http://jumpoff.io
+ * Plugin URI:        http://jumpoff.io/beta
  * Description:       JumpOff is creative writing plugin that provides writing prompts and encourages freewriting.
- * Version:           1.0.0
+ * Version:           0.5.0
  * Author:            Jesse Lee
  * Author URI:        http://jessequinnlee.com
  * License:           GPL-2.0+
@@ -64,7 +64,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-jumpoff.php';
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
  *
- * @since    1.0.0
+ * @since    0.5.0
  */
 function run_jumpoff() {
 

@@ -28,7 +28,7 @@ function jumpoff_dashboard_widget() {
 	?>
 
 	<div id="jo_dash_widget_wrapper">
-		<img id="jo_dash_widget_logo" src="<?php echo(plugin_dir_url().'jumpoff/assets/jumpoff-logo-wide-400.jpg'); ?>" alt="JumpOff Logo" />
+		<img id="jo_dash_widget_logo" src="<?php echo(plugins_url().'/jumpoff/assets/jumpoff-logo-wide-400.jpg'); ?>" alt="JumpOff Logo" />
 		<div id="jo_flow_written_today"><?php if ( !$jo_flow_streak['today'] ) { echo('Need Flow Today For Streak'); } ?></div>
 		<table id="jo_dash_stats">
 			<tr id="jo_flow_streak">

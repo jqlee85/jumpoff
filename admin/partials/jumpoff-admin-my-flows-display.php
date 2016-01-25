@@ -6,7 +6,7 @@
  * This file is used to markup the My Flows page of the plugin
  *
  * @link       http://jumpoff.io
- * @since      1.0.0
+ * @since      0.5.0
  *
  * @package    Jumpoff
  * @subpackage Jumpoff/admin/partials
@@ -68,7 +68,7 @@ function jo_display_flow_archive() {
 	if ( count( $flows ) > $max_flows ) {
 		echo '<p class="view-all"><a href="' . esc_url( admin_url( 'edit.php?post_status=draft' ) ) . '">' . _x( 'View all', 'drafts' ) . "</a></p>\n";
  	}
-	echo '<img class="jo_logo_header" src="'.plugin_dir_url( $file ).'jumpoff/assets/jumpoff-logo-wide-400.jpg" alt="JumpOff Logo" />';
+	echo '<img class="jo_logo_header" src="'.plugins_url().'/jumpoff/assets/jumpoff-logo-wide-400.jpg" alt="JumpOff Logo" />';
 	echo '<h2 class="hide-if-no-js jo_recent_flows_title">' . __( 'Recent Flows' ) . "</h2>";
 
 	$flows = array_slice( $flows, 0, $max_flows );
