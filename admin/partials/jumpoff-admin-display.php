@@ -5,8 +5,8 @@
  *
  * This file is used to markup the admin-facing aspects of the plugin.
  *
- * @link       http://jessequinnlee.com
- * @since      1.0.0
+ * @link       http://jumpoff.io
+ * @since      0.5.0
  *
  * @package    Jumpoff
  * @subpackage Jumpoff/admin/partials
@@ -41,9 +41,9 @@ function jo_display_prompt_box() {
 	<div id="jo_prompt_times_container">
 		<?php // CHANGE to customized elements with data attributes instead of radio buttons, make the length is the button, with a border or color change to indicate selected value ?>
 		<ul id="jo_prompt_times">
-			<li class="jo_prompt_time jo_checked" id="jo_prompt_time_60" data-value="60">1<br><span>min</span></li>
+			<li class="jo_prompt_time" id="jo_prompt_time_60" data-value="60">1<br><span>min</span></li>
 			<li class="jo_prompt_time" id="jo_prompt_time_120" data-value="120">2<br><span>min</span></li>
-			<li class="jo_prompt_time" id="jo_prompt_time_300" data-value="300">5<br><span>min</span></li>	
+			<li class="jo_prompt_time jo_checked" id="jo_prompt_time_300" data-value="300">5<br><span>min</span></li>	
 			<li class="jo_prompt_time" id="jo_prompt_time_600" data-value="600">10<br><span>min</span></li>
 		</ul>
 	</div>
