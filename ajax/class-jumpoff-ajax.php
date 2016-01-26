@@ -3,8 +3,8 @@
 /**
  * The backend AJAX handlers of the plugin.
  *
- * @link       http://jessequinnlee.com
- * @since      1.0.0
+ * @link       http://jumpoff.io
+ * @since      0.5.0
  *
  * @package    Jumpoff
  * @subpackage Jumpoff/ajax
@@ -24,7 +24,7 @@ class Jumpoff_AJAX {
 	/**
 	 * The ID of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      string    $plugin_name    The ID of this plugin.
 	 */
@@ -33,7 +33,7 @@ class Jumpoff_AJAX {
 	/**
 	 * The version of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      string    $version    The current version of this plugin.
 	 */
@@ -42,7 +42,7 @@ class Jumpoff_AJAX {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @param      string    $plugin_name       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
@@ -56,7 +56,7 @@ class Jumpoff_AJAX {
 	/**
 	 * Saves star/unstar value for Flows on Recent Flows page
 	 *
-	 *@since 	  1.0.0
+	 *@since 	  0.5.0
 	 *@param      Gets parameters form AJAX $_POST
 	 */
 	public function jo_save_flow_star() {
@@ -91,8 +91,9 @@ class Jumpoff_AJAX {
 		
 		if ( $is_success ) { $message = 'UPDATED '. $flow_id . ' jumpoff_flow_flag ' . $is_starred . ' | ' . $_POST['is_starred']	;}
 		else { $message = 'not updated '. $flow_id . ' jumpoff_flow_flag ' . $is_starred . ' | ' . $_POST['is_starred'];}
-		$starred = get_post_meta( $flow_id, 'jumpoff_flow_flag' )[0];
-
+		$starred = get_post_meta( $flow_id, 'jumpoff_flow_flag', false );
+		$starred = $starred[0];
+		
 		wp_send_json_success( array( 'success' => $is_success, 'message' => $message, 'starred' => $starred, 'id' => $flow_id ) );
 		
 
@@ -101,7 +102,7 @@ class Jumpoff_AJAX {
 	/**
 	 * Returns either 'a' or 'an' depending on a word
 	 *
-	 *@since 	  1.0.0
+	 *@since 	  0.5.0
 	 *@param      string 	$word 		to check if gets 'an' or 'a'
 	 */
 	public function jo_a_or_an($word) {
@@ -125,7 +126,7 @@ class Jumpoff_AJAX {
 	/**
 	 * Generates and returns a random 3 word prompt from the JumpOff database
 	 *
-	 *@since 	  1.0.0
+	 *@since 	  0.5.0
 	 */
 	public function jo_get_random_prompt() {
 		
@@ -142,7 +143,7 @@ class Jumpoff_AJAX {
 	/**
 	 * Handles AJAX request for a new prompt
 	 *
-	 *@since 	  1.0.0
+	 *@since 	  0.5.0
 	 *@param      Gets parameters form AJAX $_POST
 	 */
 	public function jo_get_new_prompt_callback() {
@@ -154,7 +155,7 @@ class Jumpoff_AJAX {
 	/**
 	 * Saves a Flow as a Post draft
 	 *
-	 *@since 	  1.0.0
+	 *@since 	  0.5.0
 	 *@param      Gets parameters form AJAX $_POST
 	 */
 	public function jo_save_flow_as_draft() {
@@ -183,7 +184,7 @@ class Jumpoff_AJAX {
 	/**
 	 * Saves a Flow as a Post draft
 	 *
-	 *@since 	  1.0.0
+	 *@since 	  0.5.0
 	 *
 	 */
 	public function jo_save_flow_as_post() {
@@ -213,7 +214,7 @@ class Jumpoff_AJAX {
 	/**
 	 * Saves a Flow as a Flow draft, returns a flow's id and an edit link as JSON for front-end AJAX handlers
 	 *
-	 *@since 	  1.0.0
+	 *@since 	  0.5.0
 	 *@param      Gets parameters form AJAX $_POST
 	 */
 	public function jo_archive_flow() {
