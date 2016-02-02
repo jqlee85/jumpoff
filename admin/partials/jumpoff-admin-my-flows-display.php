@@ -24,7 +24,10 @@ function jumpoff_my_flows_page() {
 
 	echo '</div>';
 
+
 }
+
+
 
 //display archive
 function jo_display_flow_archive() {
@@ -41,20 +44,26 @@ function jo_display_flow_archive() {
 			
 			<?php 
 			//echo most recent flows 
-			
+			//get query var
+	$paged = ( get_query_var('page') ) ? get_query_var('page') : 1;
+
 	$max_flows = 999;
 
-	$query_args = array(
-		'post_type'      => 'flow',
-		'post_status'	 => 'draft, publish, pending',
-		'posts_per_page' => $max_flows,
-		'orderby'        => 'modified',
-		'order'          => 'DESC'
-	);
-	$flows = get_posts( $query_args );
-	if ( ! $flows ) {
-		return;
-	}
+	
+		$query_args = array(
+			'post_type'      => 'flow',
+			'post_status'	 => 'draft, publish, pending',
+			'posts_per_page' => $max_flows,
+			'orderby'        => 'modified',
+			'order'          => 'DESC',
+			'paged'			 => '$paged'
+		);
+		$flows = get_posts( $query_args );
+		if ( ! $flows ) {
+			return;
+ 		}
+ 	
+
 	
 	if ( count( $flows ) > $max_flows ) {
 		echo '<p class="view-all"><a href="' . esc_url( admin_url( 'edit.php?post_status=draft' ) ) . '">' . _x( 'View all', 'drafts' ) . "</a></p>\n";
@@ -101,6 +110,7 @@ function jo_display_flow_archive() {
 		<?php
 	}//end foreach
 
+
 			?>
 			 
 		</table>
@@ -108,6 +118,7 @@ function jo_display_flow_archive() {
 	</div>
 	<?php
 }
+
 
 jumpoff_my_flows_page();
 

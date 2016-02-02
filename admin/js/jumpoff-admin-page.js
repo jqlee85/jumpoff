@@ -33,6 +33,11 @@
 
 		/*----- JumpOff Page Functionality -------*/
 
+		//clear input field if cached content there
+		
+		   	document.getElementById('jo_flow_box').value = '';
+		
+
 		//prevent user from using delete or backspace keys
 		jQuery("#jo_flow_box").keydown(function(e) {
 		    e.keyCode; // this value
@@ -73,6 +78,7 @@
 		var input = document.getElementById("jo_flow_box");
 		
 		var reset = function (e) {
+		    jQuery('#jo_flow_box').focus();
 		    var len = this.value.length;
 		    this.setSelectionRange(len, len);
 		};
@@ -138,7 +144,7 @@
 			   }
 			}, 1000);
 
-
+			
 			
 			//show the counter on hover
 			setTimeout(function() {
@@ -161,9 +167,12 @@
 		jQuery('#jo_flow_box').focus();
 		// Force focus
 		jQuery('#jo_flow_box').focusout( function(){
-		   if ( 
-		   		!jQuery('#jo_flow_end_overlay').hasClass('jo_show') ) {
-		   		jQuery('#jo_flow_box').focus();
+		   console.log('focusout called');
+
+		   if ( jQuery( '#jo_flow_end_overlay:not(.jo_show)' ) ) {
+		   		setTimeout(function(){
+		   			jQuery('#jo_flow_box').focus();
+				},10);
 			}
 		});
 
