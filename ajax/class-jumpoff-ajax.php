@@ -134,7 +134,7 @@ class Jumpoff_AJAX {
 		$verb = $wpdb->get_results( "SELECT word FROM wp_jo_prompts WHERE word_class = 'verb' ORDER BY RAND() LIMIT 1", OBJECT );
 		$noun = $wpdb->get_results( "SELECT word FROM wp_jo_prompts WHERE word_class = 'noun' ORDER BY RAND() LIMIT 1", OBJECT );
 
-		$prompt = $verb[0]->word . ' ' . $this->jo_a_or_an($noun[0]->word) . ' ' . $noun[0]->word;
+		$prompt = ucfirst($verb[0]->word) . ' ' . $this->jo_a_or_an($noun[0]->word) . ' ' . $noun[0]->word . '.';
 		
 		return $prompt;
 
